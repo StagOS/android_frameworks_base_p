@@ -27,6 +27,7 @@ import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.annotation.Nullable;
 import android.annotation.UserIdInt;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.ParceledListSlice;
 import android.content.res.Resources;
@@ -368,6 +369,7 @@ final class DisplayPowerController implements AutomaticBrightnessController.Call
     private ObjectAnimator mColorFadeOffAnimator;
     private RampAnimator<DisplayPowerState> mScreenBrightnessRampAnimator;
 
+    final ContentResolver cr;
 
     // Screen-off animation
     private int mScreenOffAnimation;
@@ -394,6 +396,8 @@ final class DisplayPowerController implements AutomaticBrightnessController.Call
         mWindowManagerPolicy = LocalServices.getService(WindowManagerPolicy.class);
         mBlanker = blanker;
         mContext = context;
+
+        cr = mContext.getContentResolver();
 
         final Resources resources = context.getResources();
         final int screenBrightnessSettingMinimum = clampAbsoluteBrightness(resources.getInteger(
