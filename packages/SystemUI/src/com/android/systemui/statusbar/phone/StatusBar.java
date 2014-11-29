@@ -738,8 +738,8 @@ public class StatusBar extends SystemUI implements DemoMode,
 
         createAndAddWindows();
 
-        mKCUFSettingsObserver.observe();
-        mKCUFSettingsObserver.update();
+        mStagSettingsObserver.observe();
+        mStagSettingsObserver.update();
 
         // Make sure we always have the most current wallpaper info.
         IntentFilter wallpaperChangedFilter = new IntentFilter(Intent.ACTION_WALLPAPER_CHANGED);
@@ -4687,9 +4687,9 @@ public class StatusBar extends SystemUI implements DemoMode,
         }
     };
 
-    private KCUFSettingsObserver mKCUFSettingsObserver = new KCUFSettingsObserver(mHandler);
-    private class KCUFSettingsObserver extends ContentObserver {
-        KCUFSettingsObserver(Handler handler) {
+    private StagSettingsObserver mStagSettingsObserver = new StagSettingsObserver(mHandler);
+    private class StagSettingsObserver extends ContentObserver {
+        StagSettingsObserver(Handler handler) {
             super(handler);
         }
          void observe() {
