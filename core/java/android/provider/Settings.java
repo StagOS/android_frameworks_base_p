@@ -8932,6 +8932,12 @@ public final class Settings {
          */
         public static final int VR_DISPLAY_MODE_OFF = 1;
 
+        /** Whether to vibrate when quick settings tile is pressed.
+          *
+          * @hide
+          */
+         public static final String QUICK_SETTINGS_TILES_VIBRATE = "quick_settings_vibrate";
+
         /**
          * Whether CarrierAppUtils#disableCarrierAppsUntilPrivileged has been executed at least
          * once.
@@ -9249,13 +9255,6 @@ public final class Settings {
         /** @hide */
         public static final Validator STATUS_BAR_BATTERY_STYLE_VALIDATOR =
                 new SettingsValidators.InclusiveIntegerRangeValidator(0, 4);
-
-        /**
-         * Whether to vibrate when quick settings tile is pressed.
-         *
-         * @hide
-         */
-        public static final String QUICK_SETTINGS_TILES_VIBRATE = "quick_settings_vibrate";
 
 	/**
 	 * @hide

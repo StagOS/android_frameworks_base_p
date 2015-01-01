@@ -175,7 +175,8 @@ public abstract class QSTileImpl<TState extends State> implements QSTile {
         return (Settings.Secure.getIntForUser(mContext.getContentResolver(),
                 Settings.Secure.QUICK_SETTINGS_TILES_VIBRATE, 0, UserHandle.USER_CURRENT) == 1);
     }
-     public void vibrateTile(int duration) {
+
+    public void vibrateTile(int duration) {
         if (!isVibrationEnabled()) { return; }
         if (mVibrator != null) {
             if (mVibrator.hasVibrator()) { mVibrator.vibrate(duration); }
@@ -214,6 +215,7 @@ public abstract class QSTileImpl<TState extends State> implements QSTile {
                 mContext,
                 Prefs.Key.QS_LONG_PRESS_TOOLTIP_SHOWN_COUNT,
                 QuickStatusBarHeader.MAX_TOOLTIP_SHOWN_COUNT);
+        vibrateTile(45);
     }
 
     public LogMaker populate(LogMaker logMaker) {
