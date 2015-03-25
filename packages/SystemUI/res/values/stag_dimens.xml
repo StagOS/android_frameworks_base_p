@@ -49,6 +49,9 @@
     <dimen name="floating_action_button_margin_side">32dp</dimen>
     <dimen name="floating_action_button_margin_bottom">46dp</dimen>
 
-	<!-- Sets a custom extra padding for the QS icons and statusbar date -->
-	<dimen name="qs_items_padding">8dp</dimen>
+    <!-- Sets a custom extra padding for the QS icons and statusbar date -->
+    <dimen name="qs_items_padding">8dp</dimen>
+
+    <!-- QS detail view scrolling -->
+    <dimen name="qs_detail_item_height_twoline">72dp</dimen>
 </resources>
