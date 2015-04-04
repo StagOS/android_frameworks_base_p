@@ -58,4 +58,7 @@
     <!-- Custom Carrier Label -->
     <dimen name="status_bar_carrier_height">14dp</dimen>
 
+    <!-- Membar spacing -->
+    <dimen name="recents_membar_spacing">12dp</dimen>
+
 </resources>
