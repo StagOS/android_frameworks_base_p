@@ -4979,6 +4979,12 @@ public final class Settings {
          */
         public static final String HOME_RESIZE_DURATION = "home_resize_anim_duration";
 
+	    /**
+         * show the membar in recents
+         *  @hide
+         */
+        public static final String SYSTEMUI_RECENTS_MEM_DISPLAY = "systemui_recents_mem_display";
+
         /**
          * Pixel Anim Color
          * @hide
