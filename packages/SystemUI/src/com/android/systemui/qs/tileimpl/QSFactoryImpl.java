@@ -120,6 +120,8 @@ public class QSFactoryImpl implements QSFactory {
                 return new ThemeTile(mHost);
             case "gaming":
                 return new GamingModeTile(mHost);
+            case "heads_up":
+                return new HeadsUpTile(mHost);
         }
 
         // Intent tiles.
