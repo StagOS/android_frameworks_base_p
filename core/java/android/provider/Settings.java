@@ -5292,6 +5292,17 @@ public final class Settings {
         public static final String IMMERSIVE_RECENTS = "immersive_recents";
 
         /**
+         * Volume key controls ringtone or media sound stream
+         * @hide
+         */
+        public static final String VOLUME_KEYS_CONTROL_RING_TONE =
+                "volume_keys_control_ring_tone";
+
+        /** @hide */
+        private static final Validator VOLUME_KEYS_CONTROL_RING_TONE_VALIDATOR =
+               BOOLEAN_VALIDATOR;
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
@@ -5368,8 +5379,9 @@ public final class Settings {
             STATUSBAR_CLOCK_AM_PM_STYLE,
             STATUSBAR_CLOCK_DATE_DISPLAY,
             STATUSBAR_CLOCK_DATE_STYLE,
-            STATUSBAR_CLOCK_DATE_FORMAT
-            };
+            STATUSBAR_CLOCK_DATE_FORMAT,
+            VOLUME_KEYS_CONTROL_RING_TONE,
+        };
 
         /**
          * Keys we no longer back up under the current schema, but want to continue to
@@ -5507,6 +5519,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(STATUSBAR_CLOCK_DATE_FORMAT);
             PRIVATE_SETTINGS.add(STATUS_BAR_BRIGHTNESS_CONTROL);
             PRIVATE_SETTINGS.add(WEATHER_LOCKSCREEN_UNIT);
+            PRIVATE_SETTINGS.add(VOLUME_KEYS_CONTROL_RING_TONE);
         }
 
 
@@ -5618,6 +5631,7 @@ public final class Settings {
             VALIDATORS.put(STATUSBAR_CLOCK_DATE_STYLE, STATUSBAR_CLOCK_DATE_STYLE_VALIDATOR);
             VALIDATORS.put(STATUSBAR_CLOCK_DATE_FORMAT, STATUSBAR_CLOCK_DATE_FORMAT_VALIDATOR);
             VALIDATORS.put(WEATHER_LOCKSCREEN_UNIT, WEATHER_LOCKSCREEN_UNIT_VALIDATOR);
+            VALIDATORS.put(VOLUME_KEYS_CONTROL_RING_TONE,VOLUME_KEYS_CONTROL_RING_TONE_VALIDATOR);
         }
 
         /**
