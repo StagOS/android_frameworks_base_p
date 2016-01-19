@@ -17,7 +17,7 @@
 * -->
 */
 
-package com.android.internal.util.kcuf;
+package com.android.internal.util.stag;
 
 import android.app.ActivityManager;
 import android.content.Context;

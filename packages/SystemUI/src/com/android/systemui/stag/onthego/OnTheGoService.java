@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.systemui.kcuf.onthego;
+package com.android.systemui.stag.onthego;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -40,7 +40,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 
-import com.android.internal.util.kcuf.OnTheGoUtils;
+import com.android.internal.util.stag.OnTheGoUtils;
 import com.android.systemui.R;
 
 import java.io.IOException;
@@ -353,7 +353,7 @@ public class OnTheGoService extends Service {
 
         if (type == 1 || type == 2) {
             final ComponentName cn = new ComponentName("com.android.systemui",
-                    "com.android.systemui.kcuf.onthego.OnTheGoService");
+                    "com.android.systemui.stag.onthego.OnTheGoService");
             final Intent startIntent = new Intent();
             startIntent.setComponent(cn);
             startIntent.setAction(ACTION_START);

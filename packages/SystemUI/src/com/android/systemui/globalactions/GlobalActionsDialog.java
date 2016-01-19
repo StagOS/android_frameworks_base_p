@@ -93,7 +93,7 @@ import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.internal.telephony.TelephonyProperties;
-import com.android.internal.util.kcuf.KCUFUtils;
+import com.android.internal.util.stag.StagUtils;
 import com.android.internal.util.EmergencyAffordanceManager;
 import com.android.internal.util.ScreenshotHelper;
 import com.android.internal.widget.LockPatternUtils;
@@ -109,7 +109,7 @@ import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.List;
 
-import com.android.internal.util.kcuf.OnTheGoActions;
+import com.android.internal.util.stag.OnTheGoActions;
 
 /**
  * Helper to show the global actions dialog.  Each item is an {@link Action} that
@@ -684,7 +684,7 @@ class GlobalActionsDialog implements DialogInterface.OnDismissListener,
             mHandler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    KCUFUtils.takeScreenshot(true);
+                    StagUtils.takeScreenshot(true);
                 }
             }, 500);
         }
@@ -695,7 +695,7 @@ class GlobalActionsDialog implements DialogInterface.OnDismissListener,
             mHandler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    KCUFUtils.takeScreenshot(false);
+                    StagUtils.takeScreenshot(false);
                 }
             }, 500);
             return true;
@@ -1042,7 +1042,7 @@ class GlobalActionsDialog implements DialogInterface.OnDismissListener,
 
     private void startOnTheGo() {
         final ComponentName cn = new ComponentName("com.android.systemui",
-                "com.android.systemui.kcuf.onthego.OnTheGoService");
+                "com.android.systemui.stag.onthego.OnTheGoService");
         final Intent startIntent = new Intent();
         startIntent.setComponent(cn);
         startIntent.setAction("start");

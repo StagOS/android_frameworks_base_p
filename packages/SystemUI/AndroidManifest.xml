@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
-/*
+<?xml version="1.0" encoding="utf-8"?> <!-- /*
  * Copyright (c) 2014 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -281,7 +279,7 @@
 
         <!-- started from PhoneWindowManager
              TODO: Should have an android:permission attribute -->
-        <service android:name=".kcuf.onthego.OnTheGoService"
+        <service android:name=".stag.onthego.OnTheGoService"
             android:process=":onthego"
             android:exported="false" />
 
@@ -296,7 +294,7 @@
 
         <!-- started from PhoneWindowManager
              TODO: Should have an android:permission attribute -->
-        <service android:name=".kcuf.screenrecord.TakeScreenrecordService"
+        <service android:name=".stag.screenrecord.TakeScreenrecordService"
             android:process=":screenrecord"
             android:exported="false" />
 

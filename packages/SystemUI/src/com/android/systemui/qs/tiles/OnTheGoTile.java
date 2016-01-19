@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 The KCUF Rom
+ * Copyright (C) 2018 The StagOS
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ import com.android.systemui.qs.QSHost;
 import com.android.systemui.qs.tileimpl.QSTileImpl;
 
 
-import com.android.internal.util.kcuf.OnTheGoActions;
+import com.android.internal.util.stag.OnTheGoActions;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 
 /** Quick settings tile: OnTheGo Mode **/
@@ -49,7 +49,7 @@ public class OnTheGoTile extends QSTileImpl<BooleanState> {
     protected void toggleState() {
         Intent service = (new Intent())
                 .setClassName("com.android.systemui",
-                "com.android.systemui.kcuf.onthego.OnTheGoService");
+                "com.android.systemui.stag.onthego.OnTheGoService");
         OnTheGoActions.processAction(mContext,
                 OnTheGoActions.ACTION_ONTHEGO_TOGGLE);
     }
@@ -80,7 +80,7 @@ public class OnTheGoTile extends QSTileImpl<BooleanState> {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.KCUF_SETTINGS;
+        return MetricsEvent.STAG_SETTINGS;
     }
 
     @Override
