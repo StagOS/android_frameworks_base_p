@@ -87,4 +87,8 @@
 
     <!-- Custom Carrier Label -->
     <color name="status_bar_carrier_color">#FFFFFFFF</color>
+
+    <!-- Recents membar text color -->
+    <color name="recents_membar_text_color">@android:color/white</color>
+
 </resources>
