@@ -400,17 +400,17 @@
             android:exported="false" />
 
         <!-- Springboard for launching the share activity -->
-        <receiver android:name=".kcuf.screenrecord.GlobalScreenrecord$ShareReceiver"
+        <receiver android:name=".stag.screenrecord.GlobalScreenrecord$ShareReceiver"
             android:process=":screenrecord"
             android:exported="false" />
 
         <!-- Callback for dismissing screenrecord notification after a share target is picked -->
-        <receiver android:name=".kcuf.screenrecord.GlobalScreenrecord$TargetChosenReceiver"
+        <receiver android:name=".stag.screenrecord.GlobalScreenrecord$TargetChosenReceiver"
             android:process=":screenrecord"
             android:exported="false" />
 
         <!-- Callback for deleting screenrecord notification -->
-        <receiver android:name=".kcuf.screenrecord.GlobalScreenrecord$DeleteScreenrecordReceiver"
+        <receiver android:name=".stagscreenrecord.GlobalScreenrecord$DeleteScreenrecordReceiver"
             android:process=":screenrecord"
             android:exported="false" />
 
