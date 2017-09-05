@@ -295,6 +295,7 @@ public class RecentsActivity extends Activity implements ViewTreeObserver.OnPreD
                 overrideAnimation));
         mRecentsView.endFABanimation();
         ActivityManagerWrapper.getInstance().closeSystemWindows(SYSTEM_DIALOG_REASON_HOME_KEY);
+        mRecentsView.endFABanimation();
         EventBus.getDefault().send(dismissEvent);
     }
 
