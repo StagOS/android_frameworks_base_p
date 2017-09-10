@@ -4514,6 +4514,12 @@ public final class Settings {
         public static final String ON_THE_GO_ALPHA = "on_the_go_alpha";
 
         /**
+         * Wether navigation bar is enabled or not
+         * @hide
+         */
+        public static final String NAVIGATION_BAR_SHOW = "navigation_bar_show";
+
+	/**
          * Whether the service should restart itself or not.
          *
          * @hide
