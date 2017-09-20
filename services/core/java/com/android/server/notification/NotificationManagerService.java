@@ -4915,7 +4915,7 @@ public class NotificationManagerService extends SystemService {
             return false;
         }
         // suppressed due to DND
-        if ((record.getSuppressedVisualEffects() & SUPPRESSED_EFFECT_LIGHTS) != 0) {
+        if ((record.getSuppressedVisualEffects() & SUPPRESSED_EFFECT_LIGHTS) != 0 && (record.isIntercepted() || (!record.isIntercepted() && !record.shouldLightOnZen()))) {
             return false;
         }
         // Suppressed because it's a silent update
