@@ -6443,10 +6443,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         return mKeyHandler != null ? mKeyHandler.isHwKeysDisabled() : false;
     }
 
-    private boolean isHwKeysDisabled() {
-        return mKeyHandler != null ? mKeyHandler.isHwKeysDisabled() : false;
-    }
-
     /** {@inheritDoc} */
     @Override
     public int interceptKeyBeforeQueueing(KeyEvent event, int policyFlags) {
