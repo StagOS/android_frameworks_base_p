@@ -321,7 +321,7 @@
                   android:theme="@style/ExTunerSettings"
                   android:label="@string/statusbar_items_title"
                   android:process=":tuner"
-                  android:parentActivityName="com.kcuf.settings.fragments.StatusBarSettings"
+                  android:parentActivityName="com.stag.settings.fragments.StatusBarSettings"
                   android:exported="true">
         </activity>
 
@@ -329,7 +329,7 @@
                   android:theme="@style/ExTunerSettings"
                   android:label="@string/nav_bar"
                   android:process=":tuner"
-                  android:parentActivityName="com.kcuf.settings.fragments.NavbarSettings"
+                  android:parentActivityName="com.stag.settings.fragments.NavbarSettings"
                   android:exported="true">
         </activity>
 
@@ -337,7 +337,7 @@
                   android:theme="@style/ExTunerSettings"
                   android:label="@string/tuner_lock_screen"
                   android:process=":tuner"
-                  android:parentActivityName="com.kcuf.settings.fragments.LockScreenSettings"
+                  android:parentActivityName="com.stag.settings.fragments.LockScreenSettings"
                   android:exported="true">
         </activity>
 
