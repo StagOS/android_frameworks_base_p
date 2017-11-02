@@ -4534,6 +4534,7 @@ public final class Settings {
          * @hide
          */
         public static final String RECENTS_CLEAR_ALL_LOCATION = "recents_clear_all_location";
+
          /**
          * show clear all recents button
          *  @hide
