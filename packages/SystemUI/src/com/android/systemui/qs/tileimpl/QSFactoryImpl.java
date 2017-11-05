@@ -38,6 +38,7 @@ import com.android.systemui.qs.tiles.HeadsUpTile;
 import com.android.systemui.qs.tiles.GamingModeTile;
 import com.android.systemui.qs.tiles.HotspotTile;
 import com.android.systemui.qs.tiles.IntentTile;
+import com.android.systemui.qs.tiles.LiveDisplayTile;
 import com.android.systemui.qs.tiles.LocationTile;
 import com.android.systemui.qs.tiles.LteTile;
 import com.android.systemui.qs.tiles.NfcTile;
@@ -134,6 +135,8 @@ public class QSFactoryImpl implements QSFactory {
                 return new SoundSearchTile(mHost);
             case "smartpixels":
                 return new SmartPixelsTile(mHost);
+            case "livedisplay":
+                return new LiveDisplayTile(mHost);
         }
 
         // Intent tiles.
