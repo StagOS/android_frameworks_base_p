@@ -7050,7 +7050,8 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                     result &= ~ACTION_PASS_TO_USER;
                     return result;
                 }
-                if (mDeviceKeyHandler.handleKeyEvent(event)) {
+                event = mDeviceKeyHandler.handleKeyEvent(event);
+                if (event == null) {
                     result &= ~ACTION_PASS_TO_USER;
                     return result;
                 }
