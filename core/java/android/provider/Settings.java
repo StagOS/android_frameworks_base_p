@@ -5030,7 +5030,12 @@ public final class Settings {
         public static final String PIN_BUTTON_COLOR = "pin_button_color";
 
         /**
-         * Select various accents to go along with system themes
+         * Unlock keystore with fingerprint after reboot
+         * @hide
+         */
+        public static final String FP_UNLOCK_KEYSTORE = "fp_unlock_keystore";
+
+        /**
          *
          * @hide
          */
