@@ -26,4 +26,7 @@
     <bool name="config_needCustomFODView">false</bool>
 
     <bool name="config_usesOnePlusFOD">false</bool>
+
+    <integer name="config_flashlightProximityTimeout">300</integer>
+ 
 </resources>
