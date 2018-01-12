@@ -7621,4 +7621,8 @@ public class WindowManagerService extends IWindowManager.Stub
     public boolean isGestureButtonRegion(int i, int i2) {
         return this.mPolicy.isGestureButtonRegion(i, i2);
     }
+
+    public void screenRecordAction(int mode) {
+        mPolicy.screenRecordAction(mode);
+    }
 }
