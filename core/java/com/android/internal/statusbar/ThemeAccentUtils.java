@@ -24,6 +24,7 @@ import android.util.Log;
 public class ThemeAccentUtils {
     public static final String TAG = "ThemeAccentUtils";
 
+    // Accents
     private static final String[] ACCENTS = {
         "default_accent", // 0
         "com.accents.red", // 1
@@ -96,6 +97,15 @@ public class ThemeAccentUtils {
         "com.android.system.theme.black", // 0
         "com.android.settings.theme.black", // 1
         "com.android.systemui.theme.black", // 2
+        "com.android.settings.intelligence.theme.black", // 3
+        "com.android.gboard.theme.black", // 4
+    };
+
+    private static final String[] SHISHUNIGHTS_THEMES = {
+        "com.android.system.theme.shishunights", // 0
+        "com.android.settings.theme.shishunights", // 1
+        "com.android.settings.intelligence.theme.shishunights", // 2
+        "com.android.gboard.theme.shishunights", // 3
     };
 
     // Switch themes
@@ -157,7 +167,7 @@ public class ThemeAccentUtils {
         } else if (accentSetting == 20) {
             try {
                 // If using a dark or black theme we use the white accent, otherwise use the black accent
-                if (isUsingDarkTheme(om, userId) || isUsingBlackTheme(om, userId)) {
+                if (isUsingDarkTheme(om, userId) || isUsingBlackTheme(om, userId) || isUsingShishuNightsTheme(om, userId)) {
                     om.setEnabled(ACCENTS[21],
                             true, userId);
                 } else {
@@ -208,6 +218,19 @@ public class ThemeAccentUtils {
         return themeInfo != null && themeInfo.isEnabled();
      }
 
+    // Check for the shishunights system theme
+    public static boolean isUsingShishuNightsTheme(IOverlayManager om, int userId) {
+        OverlayInfo themeInfo = null;
+        try {
+            themeInfo = om.getOverlayInfo(SHISHUNIGHTS_THEMES[0],
+                    userId);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return themeInfo != null && themeInfo.isEnabled();
+     }
+
+    // Set light / dark theme
     public static void setLightDarkTheme(IOverlayManager om, int userId, boolean useDarkTheme) {
         for (String theme : DARK_THEMES) {
                 try {
@@ -235,11 +258,26 @@ public class ThemeAccentUtils {
         }
     }
 
+    // Set shishunights theme
+    public static void setShishuNightsTheme(IOverlayManager om, int userId, boolean useShishuNightsTheme) {
+        for (String theme : SHISHUNIGHTS_THEMES) {
+            try {
+                om.setEnabled(theme,
+                        useShishuNightsTheme, userId);
+                unfuckBlackWhiteAccent(om, userId);
+                if (useShishuNightsTheme) {
+                    unloadStockDarkTheme(om, userId);
+                }
+            } catch (RemoteException e) {
+            }
+        }
+    }
+
     // Check for black and white accent overlays
     public static void unfuckBlackWhiteAccent(IOverlayManager om, int userId) {
         OverlayInfo themeInfo = null;
         try {
-            if (isUsingDarkTheme(om, userId) || isUsingBlackTheme(om, userId)) {
+            if (isUsingDarkTheme(om, userId) || isUsingBlackTheme(om, userId) || isUsingShishuNightsTheme(om, userId)) {
                 themeInfo = om.getOverlayInfo(ACCENTS[20],
                         userId);
                 if (themeInfo != null && themeInfo.isEnabled()) {
