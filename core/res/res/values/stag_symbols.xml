@@ -224,4 +224,7 @@
   <java-symbol type="drawable" name="weather_thunderstorms" />
   <java-symbol type="drawable" name="weather_windy" />
 
+  <!-- Ambient display music ticker -->
+  <java-symbol type="bool" name="config_canForceDozeNotifications" />
+
 </resources>

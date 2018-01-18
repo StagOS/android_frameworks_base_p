@@ -4588,6 +4588,14 @@ public final class Settings {
                 ANY_INTEGER_VALIDATOR;
 
         /**
+         * Force an Ambient notification when a new media track is being played
+         * 0 - disabled
+         * 1 - show track info within normal Ambient Display and force a new Ambient clean layout when skipping tracks
+         * @hide
+         */
+        public static final String FORCE_AMBIENT_FOR_MEDIA = "force_ambient_for_media";
+
+        /**
          * @hide
          */
         public static final String OMNI_QS_LAYOUT_ROWS_LANDSCAPE = "qs_layout_rows_landscape";
