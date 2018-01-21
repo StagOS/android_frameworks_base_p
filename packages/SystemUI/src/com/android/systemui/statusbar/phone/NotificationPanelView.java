@@ -901,7 +901,9 @@ public class NotificationPanelView extends PanelView implements
                 event.getY() > (h - mStatusBarHeaderHeight * 5))) ||
                 (!mQsExpanded && mDoubleTapToSleepEnabled
                 && event.getY() < mStatusBarHeaderHeight)) {
-            mDoubleTapToSleepGesture.onTouchEvent(event);
+            if (mDoubleTapToSleepGesture.onTouchEvent(event)) {
+                return false;
+            }
         }
         initDownStates(event);
         if (mListenForHeadsUp && !mHeadsUpTouchHelper.isTrackingHeadsUp()
