@@ -244,4 +244,7 @@
     <string name="accessibility_quick_settings_caffeine_off">Caffeine off</string>
     <string name="accessibility_quick_settings_caffeine_on">Caffeine on</string>
 
+    <!-- Sound Search tile -->
+    <string name="quick_settings_sound_search">Sound search</string>
+
 </resources>
