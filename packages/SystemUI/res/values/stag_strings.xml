@@ -223,4 +223,6 @@
     <string name="accessibility_quick_settings_gaming_mode_on">Gaming Mode</string>
     <string name="accessibility_quick_settings_gaming_mode_off">Gaming Mode</string>
 
+    <string name="recents_custom_android_n">Clear All</string>
+
 </resources>
