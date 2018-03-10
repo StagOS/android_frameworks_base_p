@@ -122,4 +122,7 @@
     <!-- Oreo's recents component activity -->
     <java-symbol type="string" name="config_recentsComponentNameOreo" />
 
+    <!-- Forcefully tint notification icon text -->
+    <java-symbol type="bool" name="config_useDarkBgNotificationTinting_override" />
+    <java-symbol type="bool" name="config_notificationTinting_override" />
 </resources>
