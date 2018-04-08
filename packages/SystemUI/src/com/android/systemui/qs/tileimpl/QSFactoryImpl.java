@@ -48,6 +48,7 @@ import com.android.systemui.qs.tiles.SoundTile;
 import com.android.systemui.qs.tiles.ScreenrecordTile;
 import com.android.systemui.qs.tiles.SoundSearchTile;
 import com.android.systemui.qs.tiles.ScreenshotTile;
+import com.android.systemui.qs.tiles.SmartPixelsTile;
 import com.android.systemui.qs.tiles.ThemeTile;
 import com.android.systemui.qs.tiles.UserTile;
 import com.android.systemui.qs.tiles.WifiTile;
@@ -131,6 +132,8 @@ public class QSFactoryImpl implements QSFactory {
                 return new CaffeineTile(mHost);
             case "soundsearch":
                 return new SoundSearchTile(mHost);
+            case "smartpixels":
+                return new SmartPixelsTile(mHost);
         }
 
         // Intent tiles.
