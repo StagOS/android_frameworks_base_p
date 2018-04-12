@@ -2559,8 +2559,8 @@ public class StatusBar extends SystemUI implements DemoMode,
     public void handleSystemKey(int key) {
         if (SPEW) Log.d(TAG, "handleNavigationKey: " + key);
 
-        if (KeyEvent.KEYCODE_MEDIA_PAUSE == key) {
-            mMediaManager.onPlayPauseTrackEvent(key, mHandler);
+        if (KeyEvent.KEYCODE_MEDIA_PREVIOUS == key || KeyEvent.KEYCODE_MEDIA_NEXT == key) {
+            mMediaManager.onSkipTrackEvent(key, mHandler);
             return;
         }
 
