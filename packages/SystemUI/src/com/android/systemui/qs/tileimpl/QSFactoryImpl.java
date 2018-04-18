@@ -58,6 +58,7 @@ import com.android.systemui.qs.tiles.WifiTile;
 import com.android.systemui.qs.tiles.WorkModeTile;
 import com.android.systemui.qs.QSTileHost;
 import com.android.systemui.util.leak.GarbageMonitor;
+import com.android.systemui.qs.tiles.AODTile;
 
 public class QSFactoryImpl implements QSFactory {
 
@@ -141,6 +142,8 @@ public class QSFactoryImpl implements QSFactory {
                 return new LiveDisplayTile(mHost);
             case "reading_mode":
                 return new ReadingModeTile(mHost);
+            case "aod":
+                return new AODTile(mHost)
         }
 
         // Intent tiles.
