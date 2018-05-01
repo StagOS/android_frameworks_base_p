@@ -155,4 +155,6 @@ oneway interface IStatusBar
      * STAG
      */
     void toggleCameraFlash();
+    void toggleCameraFlashOn();
+    void toggleCameraFlashOff();
 }
