@@ -39,6 +39,8 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.PorterDuff.Mode;
 import android.os.Handler;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.AttributeSet;
@@ -108,7 +110,6 @@ public class QSContainerImpl extends FrameLayout implements
         super(context, attrs);
         Handler mHandler = new Handler();
         mStatusBarHeaderMachine = new StatusBarHeaderMachine(context);
-
         mOverlayManager = IOverlayManager.Stub.asInterface(
                 ServiceManager.getService(Context.OVERLAY_SERVICE));
         Handler handler = new Handler();
@@ -245,6 +246,23 @@ public class QSContainerImpl extends FrameLayout implements
                 : mSetQsFromWall ? mQsBackGroundColorWall : mQsBackGroundColor;
         setQsBackground();
         setQsOverlay();
+
+        if (isColorDark(mQsBackGroundColor)) {
+            try {
+                mOverlayManager.setEnabled("com.android.systemui.custom.theme.dark",
+                        true, ActivityManager.getCurrentUser());
+            } catch (RemoteException e) {
+                Log.w("QSContainerImpl", "Can't change qs theme", e);
+            }
+        } else {
+            try {
+                mOverlayManager.setEnabled("com.android.systemui.custom.theme.dark",
+                        false, ActivityManager.getCurrentUser());
+            } catch (RemoteException e) {
+                Log.w("QSContainerImpl", "Can't change qs theme", e);
+            }
+        }
+
     }
 
     private void setQsBackground() {
