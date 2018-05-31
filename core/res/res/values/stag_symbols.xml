@@ -308,4 +308,7 @@
   <java-symbol type="id" name="pocket_hint_image" />
   <java-symbol type="id" name="pocket_hint_message" />
 
+  <!-- Flashlight proximity check -->
+  <java-symbol type="integer" name="config_flashlightProximityTimeout" />
+
 </resources>
