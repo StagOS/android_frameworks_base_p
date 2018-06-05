@@ -106,4 +106,9 @@
     <java-symbol type="color" name="generic_theme_primary" />
     <java-symbol type="color" name="generic_theme_primary_dark" />
     <java-symbol type="color" name="generic_theme_accent" />
+
+    <!-- App error dialog -->
+    <java-symbol type="id" name="aerr_copy" />
+    <java-symbol type="string" name="url_copy_success" />
+    <java-symbol type="string" name="url_copy_failed" />
 </resources>
