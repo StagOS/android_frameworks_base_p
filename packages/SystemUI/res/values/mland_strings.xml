@@ -17,4 +17,5 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- Name of the easter egg. DO NOT TRANSLATE -->
     <string name="mland">Marshmallow Land</string>
+
 </resources>
