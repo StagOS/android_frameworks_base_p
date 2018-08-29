@@ -144,7 +144,7 @@ class SaveImageInBackgroundTask extends AsyncTask<Void, Void, Void> {
         String imageDate = new SimpleDateFormat("yyyyMMdd-HHmmss").format(new Date(mImageTime));
         mImageFileName = String.format(SCREENSHOT_FILE_NAME_TEMPLATE, imageDate);
         final PackageManager pm = context.getPackageManager();
-        ActivityInfo info = KCUFUtils.getRunningActivityInfo(context);
+        ActivityInfo info = StagUtils.getRunningActivityInfo(context);
         boolean onKeyguard = context.getSystemService(KeyguardManager.class).isKeyguardLocked();
         if (info != null && !onKeyguard) {
             CharSequence appName = pm.getApplicationLabel(info.applicationInfo);
