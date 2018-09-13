@@ -260,6 +260,7 @@ import com.android.systemui.statusbar.policy.NetworkController;
 import com.android.systemui.statusbar.policy.OnHeadsUpChangedListener;
 import com.android.systemui.statusbar.policy.PreviewInflater;
 import com.android.systemui.statusbar.policy.RemoteInputQuickSettingsDisabler;
+import com.android.systemui.statusbar.policy.TelephonyIcons;
 import com.android.systemui.statusbar.policy.UserInfoController;
 import com.android.systemui.statusbar.policy.UserInfoControllerImpl;
 import com.android.systemui.statusbar.policy.UserSwitcherController;
@@ -371,6 +372,8 @@ public class StatusBar extends SystemUI implements DemoMode,
      * libhwui.
      */
     private static final float SRC_MIN_ALPHA = 0.002f;
+
+    public static boolean USE_OLD_MOBILETYPE = false;
 
     static {
         boolean onlyCoreApps;
@@ -696,6 +699,7 @@ public class StatusBar extends SystemUI implements DemoMode,
     private VibratorHelper mVibratorHelper;
 
     private boolean mLockscreenMediaMetadata;
+
 
     @Override
     public void start() {
@@ -5167,6 +5171,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.QS_PANEL_BG_COLOR_WALL),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.OMNI_USE_OLD_MOBILETYPE),
+                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -5181,7 +5188,7 @@ public class StatusBar extends SystemUI implements DemoMode,
                 getCurrentThemeSetting();
                 updateTheme();
             } else if (uri.equals(Settings.System.getUriFor(
-                    Settings.System.ACCENT_PICKER))) {            
+                    Settings.System.ACCENT_PICKER))) {
                 // Unload the accents and update the accent only when the user asks.
                 // Keeps us from overloading the system by performing these tasks every time.
                 unloadAccents();
@@ -5226,6 +5233,10 @@ public class StatusBar extends SystemUI implements DemoMode,
             setForceAmbient();
             updateCorners();
             updateKeyguardStatusSettings();
+            USE_OLD_MOBILETYPE = Settings.System.getIntForUser(mContext.getContentResolver(),
+	            Settings.System.OMNI_USE_OLD_MOBILETYPE, 0,
+        	    UserHandle.USER_CURRENT) != 0;
+            TelephonyIcons.updateIcons(USE_OLD_MOBILETYPE);
         }
     }
 
