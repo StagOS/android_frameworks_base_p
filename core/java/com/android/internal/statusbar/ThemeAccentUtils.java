@@ -47,6 +47,13 @@ public class ThemeAccentUtils {
         "com.accents.bluegrey", // 19
         "com.accents.black", // 20
         "com.accents.white", // 21
+        "com.accents.userone", // 22
+        "com.accents.usertwo", // 23
+        "com.accents.userthree", // 24
+        "com.accents.userfour", // 25
+        "com.accents.userfive", // 26
+        "com.accents.usersix", // 27
+        "com.accents.userseven", // 28
     };
 
     private static final String[] DARK_THEMES = {
@@ -73,6 +80,12 @@ public class ThemeAccentUtils {
                         true, userId);
             } catch (RemoteException e) {
                 Log.w(TAG, "Can't change theme", e);
+            }
+        } else if (accentSetting > 21) {
+            try {
+                om.setEnabled(ACCENTS[accentSetting],
+                        true, userId);
+            } catch (RemoteException e) {
             }
         } else if (accentSetting == 20) {
             try {
