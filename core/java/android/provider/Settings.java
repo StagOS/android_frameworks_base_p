@@ -4758,6 +4758,18 @@ public final class Settings {
         public static final String SHOW_FOURG_ICON = "show_fourg_icon";
 
         /**
+         * Which component to use for Recents UI
+         * 0 - Pie Recents (Quickstep)
+         * 1 - Oreo Recents (SystemUI)
+         * @hide
+         */
+        public static final String RECENTS_COMPONENT = "recents_component";
+
+        /** @hide */
+        public static final Validator RECENTS_COMPONENT_VALIDATOR =
+                new SettingsValidators.InclusiveIntegerRangeValidator(0, 1);
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
@@ -4834,6 +4846,7 @@ public final class Settings {
             STATUSBAR_CLOCK_DATE_DISPLAY,
             STATUSBAR_CLOCK_DATE_STYLE,
             STATUSBAR_CLOCK_DATE_FORMAT
+            RECENTS_COMPONENT,
         };
 
         /**
@@ -4971,7 +4984,8 @@ public final class Settings {
             PRIVATE_SETTINGS.add(STATUSBAR_CLOCK_DATE_STYLE);
             PRIVATE_SETTINGS.add(STATUSBAR_CLOCK_DATE_FORMAT);
             PRIVATE_SETTINGS.add(STATUS_BAR_BRIGHTNESS_CONTROL);
-       }
+            PRIVATE_SETTINGS.add(RECENTS_COMPONENT);
+        }
 
 
         /**
@@ -5080,6 +5094,7 @@ public final class Settings {
             VALIDATORS.put(STATUSBAR_CLOCK_DATE_DISPLAY, STATUSBAR_CLOCK_DATE_DISPLAY_VALIDATOR);
             VALIDATORS.put(STATUSBAR_CLOCK_DATE_STYLE, STATUSBAR_CLOCK_DATE_STYLE_VALIDATOR);
             VALIDATORS.put(STATUSBAR_CLOCK_DATE_FORMAT, STATUSBAR_CLOCK_DATE_FORMAT_VALIDATOR);
+            VALIDATORS.put(RECENTS_COMPONENT,RECENTS_COMPONENT_VALIDATOR);
         }
 
         /**
