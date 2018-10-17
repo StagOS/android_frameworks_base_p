@@ -4230,6 +4230,18 @@ public class StatusBar extends SystemUI implements DemoMode,
         ThemeAccentUtils.unloadAccents(mOverlayManager, mLockscreenUserManager.getCurrentUserId());
     }
 
+    // Switches qs tile style from stock to custom
+    public void updateTileStyle() {
+         int qsTileStyle = Settings.System.getIntForUser(mContext.getContentResolver(),
+                 Settings.System.QS_TILE_STYLE, 0, mLockscreenUserManager.getCurrentUserId());
+        ThemeAccentUtils.updateTileStyle(mOverlayManager, mLockscreenUserManager.getCurrentUserId(), qsTileStyle);
+    }
+
+    // Unload all qs tile styles back to stock
+    public void stockTileStyle() {
+        ThemeAccentUtils.stockTileStyle(mOverlayManager, mLockscreenUserManager.getCurrentUserId());
+    }
+
     private void updateDozingState() {
         Trace.traceCounter(Trace.TRACE_TAG_APP, "dozing", mDozing ? 1 : 0);
         Trace.beginSection("StatusBar#updateDozingState");
@@ -4910,6 +4922,9 @@ public class StatusBar extends SystemUI implements DemoMode,
                     Settings.System.ACCENT_PICKER),
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.QS_TILE_STYLE),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.SYSTEM_UI_THEME),
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
@@ -4932,11 +4947,15 @@ public class StatusBar extends SystemUI implements DemoMode,
                 getCurrentThemeSetting();
                 updateTheme();
             } else if (uri.equals(Settings.System.getUriFor(
-                    Settings.System.ACCENT_PICKER))) {
+                    Settings.System.ACCENT_PICKER))) {            
                 // Unload the accents and update the accent only when the user asks.
                 // Keeps us from overloading the system by performing these tasks every time.
                 unloadAccents();
                 updateAccents();
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.QS_TILE_STYLE))) {
+                stockTileStyle();
+                updateTileStyle();
             }
             update();
         }
