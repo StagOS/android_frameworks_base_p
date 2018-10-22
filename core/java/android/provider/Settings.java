@@ -4663,6 +4663,12 @@ public final class Settings {
 
 
         /**
+         * Whether to show VoLTE icon or not
+         * @hide
+         */
+        public static final String SHOW_VOLTE_ICON = "volte_icon";
+
+        /**
          * Stores the java DateFormat string for the date
          * @hide
          */
