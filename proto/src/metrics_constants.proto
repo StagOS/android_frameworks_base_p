@@ -6121,7 +6121,7 @@ message MetricsEvent {
     // END OF AOSP CONSTANTS
 
     // StagSettings constant
-    STAG_SETTINGS = 1500;
+    STAG_SETTINGS = 1700;
 
   }
 }
