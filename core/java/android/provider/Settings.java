@@ -4920,6 +4920,39 @@ public final class Settings {
          */
         public static final String BATTERY_BAR_HIGH_COLOR = "battery_bar_high_color";
 
+         /**
+         * Whether to show the notification ticker on the status bar
+         * @hide
+         */
+        public static final String STATUS_BAR_SHOW_TICKER = "status_bar_show_ticker";
+
+         /** @hide */
+        private static final Validator STATUS_BAR_SHOW_TICKER_VALIDATOR = BOOLEAN_VALIDATOR;
+
+         /**
+         * Ticker animation
+         * 0: Fade animation
+         * 1: Scrolling ticker
+         */
+        public static final String STATUS_BAR_TICKER_ANIMATION_MODE =
+                "status_bar_ticker_animation_mode";
+
+         /** @hide */
+        private static final Validator STATUS_BAR_TICKER_ANIMATION_MODE_VALIDATOR =
+                ANY_INTEGER_VALIDATOR;
+
+         /**
+         * Status bar ticker duration in milliseconds.
+         *
+         * @hide
+         */
+        public static final String STATUS_BAR_TICKER_TICK_DURATION =
+                "status_bar_ticker_tick_duration";
+
+         /** @hide */
+        private static final Validator STATUS_BAR_TICKER_TICK_DURATION_VALIDATOR =
+                ANY_INTEGER_VALIDATOR;
+
         /**
          * @hide
          */
@@ -6026,6 +6059,9 @@ public final class Settings {
             DOZE_ON_CHARGE,
             OMNI_CUSTOM_FP_ICON,
             THEMING_SETTINGS_DASHBOARD_ICONS,
+            STATUS_BAR_SHOW_TICKER,
+            STATUS_BAR_TICKER_ANIMATION_MODE,
+            STATUS_BAR_TICKER_TICK_DURATION
         };
 
         /**
@@ -6196,6 +6232,10 @@ public final class Settings {
             PRIVATE_SETTINGS.add(THEMING_SETTINGS_DASHBOARD_ICONS);
             // Pocket mode handler.
             PRIVATE_SETTINGS.add(POCKET_JUDGE);
+
+            PRIVATE_SETTINGS.add(STATUS_BAR_SHOW_TICKER);
+            PRIVATE_SETTINGS.add(STATUS_BAR_TICKER_ANIMATION_MODE);
+            PRIVATE_SETTINGS.add(STATUS_BAR_TICKER_TICK_DURATION);
         }
 
 
@@ -6343,6 +6383,11 @@ public final class Settings {
             VALIDATORS.put(DOZE_ON_CHARGE, DOZE_ON_CHARGE_VALIDATOR);
             VALIDATORS.put(OMNI_CUSTOM_FP_ICON, OMNI_CUSTOM_FP_ICON_VALIDATOR);
             VALIDATORS.put(THEMING_SETTINGS_DASHBOARD_ICONS, THEMING_SETTINGS_DASHBOARD_ICONS_VALIDATOR);
+            VALIDATORS.put(STATUS_BAR_SHOW_TICKER, STATUS_BAR_SHOW_TICKER_VALIDATOR);
+            VALIDATORS.put(STATUS_BAR_TICKER_ANIMATION_MODE,
+                    STATUS_BAR_TICKER_ANIMATION_MODE_VALIDATOR);
+            VALIDATORS.put(STATUS_BAR_TICKER_TICK_DURATION,
+                    STATUS_BAR_TICKER_TICK_DURATION_VALIDATOR);
         }
 
         /**
