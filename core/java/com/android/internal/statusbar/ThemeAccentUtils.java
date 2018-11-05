@@ -50,18 +50,18 @@ public class ThemeAccentUtils {
     };
 
     private static final String[] DARK_THEMES = {
-        "com.android.system.theme.dark", // 0
-        "com.android.settings.theme.dark", // 1
-        "com.android.systemui.theme.dark", // 2
+        "com.android.system.theme.dark.stag", // 0
+        "com.android.settings.theme.dark.stag", // 1
+        "com.android.systemui.theme.dark.stag", // 2
     };
 
     private static final String[] BLACK_THEMES = {
-        "com.android.system.theme.black", // 0
-        "com.android.settings.theme.black", // 1
-        "com.android.systemui.theme.black", // 2
+        "com.android.system.theme.black.stag", // 0
+        "com.android.settings.theme.black.stag", // 1
+        "com.android.systemui.theme.black.stag", // 2
     };
 
-    private static final String STOCK_DARK_THEME = "com.android.systemui.theme.dark";
+    private static final String STOCK_DARK_THEME = "com.android.systemui.theme.dark.stag";
 
     // Switches theme accent from to another or back to stock
     public static void updateAccents(IOverlayManager om, int userId, int accentSetting) {
