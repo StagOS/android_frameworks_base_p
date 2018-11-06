@@ -5600,7 +5600,7 @@ public class ActivityManagerService extends IActivityManager.Stub
         // TODO: Switch to user app stacks here.
         int ret = mActivityStartController.startActivities(caller, -1, callingPackage,
                 intents, resolvedTypes, resultTo, SafeActivityOptions.fromBundle(bOptions), userId,
-                reason);
+                reason, null /* originatingPendingIntent */);
         return ret;
     }
 
@@ -11096,6 +11096,20 @@ public class ActivityManagerService extends IActivityManager.Stub
                 Binder.restoreCallingIdentity(ident);
             }
         }
+    }
+
+    /**
+     * @return whitelist tag for a uid from mPendingTempWhitelist, null if not currently on
+     * the whitelist
+     */
+    String getPendingTempWhitelistTagForUidLocked(int uid) {
+        final PendingTempWhitelist ptw = mPendingTempWhitelist.get(uid);
+        return ptw != null ? ptw.tag : null;
+    }
+
+    @VisibleForTesting
+    boolean isActivityStartsLoggingEnabled() {
+        return mConstants.mFlagActivityStartsLoggingEnabled;
     }
 
     @Override
@@ -23425,6 +23439,19 @@ public class ActivityManagerService extends IActivityManager.Stub
             }
         }
 
+        // If the app was recently in the foreground and moved to a foreground service status,
+        // allow it to get a higher rank in memory for some time, compared to other foreground
+        // services so that it can finish performing any persistence/processing of in-memory state.
+        if (app.foregroundServices && adj > ProcessList.PERCEPTIBLE_RECENT_FOREGROUND_APP_ADJ
+                && (app.lastTopTime + mConstants.TOP_TO_FGS_GRACE_DURATION > now
+                    || app.setProcState <= ActivityManager.PROCESS_STATE_TOP)) {
+            adj = ProcessList.PERCEPTIBLE_RECENT_FOREGROUND_APP_ADJ;
+            app.adjType = "fg-service-act";
+            if (DEBUG_OOM_ADJ_REASON || logUid == appUid) {
+                reportOomAdjMessageLocked(TAG_OOM_ADJ, "Raise to recent fg: " + app);
+            }
+        }
+
         if (adj > ProcessList.PERCEPTIBLE_APP_ADJ
                 || procState > ActivityManager.PROCESS_STATE_TRANSIENT_BACKGROUND) {
             if (app.forcingToImportant != null) {
@@ -23689,6 +23716,10 @@ public class ActivityManagerService extends IActivityManager.Stub
                                         schedGroup = ProcessList.SCHED_GROUP_DEFAULT;
                                         procState = ActivityManager.PROCESS_STATE_PERSISTENT;
                                     }
+                                } else if ((cr.flags & Context.BIND_ADJUST_BELOW_PERCEPTIBLE) != 0
+                                        && clientAdj < ProcessList.PERCEPTIBLE_APP_ADJ
+                                        && adj > ProcessList.PERCEPTIBLE_APP_ADJ + 1) {
+                                    newAdj = ProcessList.PERCEPTIBLE_APP_ADJ + 1;
                                 } else if ((cr.flags&Context.BIND_NOT_VISIBLE) != 0
                                         && clientAdj < ProcessList.PERCEPTIBLE_APP_ADJ
                                         && adj > ProcessList.PERCEPTIBLE_APP_ADJ) {
@@ -24659,6 +24690,8 @@ public class ActivityManagerService extends IActivityManager.Stub
             // Must be called before updating setProcState
             maybeUpdateUsageStatsLocked(app, nowElapsed);
 
+            maybeUpdateLastTopTime(app, now);
+
             app.setProcState = app.curProcState;
             if (app.setProcState >= ActivityManager.PROCESS_STATE_HOME) {
                 app.notCachedSinceIdle = false;
@@ -24880,6 +24913,13 @@ public class ActivityManagerService extends IActivityManager.Stub
         app.reportedInteraction = isInteraction;
         if (!isInteraction) {
             app.interactionEventTime = 0;
+        }
+    }
+
+    private void maybeUpdateLastTopTime(ProcessRecord app, long nowUptime) {
+        if (app.setProcState <= ActivityManager.PROCESS_STATE_TOP
+                && app.curProcState > ActivityManager.PROCESS_STATE_TOP) {
+            app.lastTopTime = nowUptime;
         }
     }
 
@@ -26580,7 +26620,7 @@ public class ActivityManagerService extends IActivityManager.Stub
                         packageUid, packageName,
                         intents, resolvedTypes, null /* resultTo */,
                         SafeActivityOptions.fromBundle(bOptions), userId,
-                        false /* validateIncomingUser */);
+                        false /* validateIncomingUser */, null /* originatingPendingIntent */);
             }
         }
 
@@ -26922,7 +26962,7 @@ public class ActivityManagerService extends IActivityManager.Stub
 
         @Override
         public void notifyDefaultDisplaySizeChanged() {
-            synchronized (this) {
+            synchronized (ActivityManagerService.this) {
                 if (mSystemServiceManager.isBootCompleted() && mHomeProcess != null) {
 
                     // TODO: Ugly hack to unblock the release
