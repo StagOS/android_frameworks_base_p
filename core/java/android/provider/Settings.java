@@ -4845,8 +4845,8 @@ public final class Settings {
             STATUSBAR_CLOCK_AM_PM_STYLE,
             STATUSBAR_CLOCK_DATE_DISPLAY,
             STATUSBAR_CLOCK_DATE_STYLE,
-            STATUSBAR_CLOCK_DATE_FORMAT
-            RECENTS_COMPONENT,
+            STATUSBAR_CLOCK_DATE_FORMAT,
+            RECENTS_COMPONENT
         };
 
         /**
