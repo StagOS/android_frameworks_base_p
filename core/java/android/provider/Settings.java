@@ -4925,6 +4925,12 @@ public final class Settings {
 
 
         /**
+         * Whether to use icon pack for Recents
+         * @hide
+         */
+        public static final String RECENTS_ICON_PACK = "recents_icon_pack";
+
+        /**
          * Recents Clear All Button Style
          * @hide
          */
