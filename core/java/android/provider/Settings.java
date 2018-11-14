@@ -4230,6 +4230,24 @@ public final class Settings {
         public static final String FLASH_ON_CALLWAITING_DELAY = "flash_on_call_waiting_delay";
 
         /**
+         * Status bar carrier label
+         * 0: Hide
+         * 1: Display on keyguard status bar
+         * 2: Display on Normal status bar
+         * 3: Enabled for both
+         * @hide
+         */
+        public static final String STATUS_BAR_SHOW_CARRIER = "status_bar_show_carrier";
+
+        /**
+         * custom carrier label. The value is
+         * String.
+         * @hide
+         */
+        public static final String CUSTOM_CARRIER_LABEL = "custom_carrier_label";
+
+
+        /**
          * Whether to show the battery info on the lockscreen while charging
          * @hide
          */
