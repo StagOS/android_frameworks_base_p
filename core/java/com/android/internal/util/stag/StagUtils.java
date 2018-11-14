@@ -47,6 +47,7 @@ import android.view.KeyEvent;
 import com.android.internal.statusbar.IStatusBarService;
 
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Some custom utilities
@@ -198,6 +199,11 @@ public class StagUtils {
         keyguardIntent.setPackage(SYSTEMUI_PACKAGE_NAME);
         keyguardIntent.putExtra(DISMISS_KEYGUARD_EXTRA_INTENT, launchIntent);
         context.sendBroadcastAsUser(keyguardIntent, user);
+    }
+
+    public static boolean isChineseLanguage() {
+       return Resources.getSystem().getConfiguration().locale.getLanguage().startsWith(
+               Locale.CHINESE.getLanguage());
     }
 
     public static ActivityInfo getRunningActivityInfo(Context context) {
