@@ -31,6 +31,8 @@ import android.content.res.Resources;
 import android.metrics.LogMaker;
 import android.os.Handler;
 import android.os.Message;
+import android.os.UserHandle;
+import android.provider.Settings;
 import android.service.quicksettings.Tile;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -737,11 +739,16 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
                     });
                 } else {
                     v.setOnLongClickListener(view -> {
+                        t.click();
                         t.longClick();
                         return true;
                     });
                 }
             }
+            v.setOnClickListener(view -> {
+                    t.click();
+                    setAnimationTile(v);
+            });
         }
     }
 
