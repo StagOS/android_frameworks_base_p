@@ -70,6 +70,7 @@ import android.util.ArraySet;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -335,6 +336,57 @@ class GlobalActionsDialog implements DialogInterface.OnDismissListener,
         awakenIfNecessary();
         mDialog = createDialog();
         prepareDialog();
+        WindowManager.LayoutParams attrs = mDialog.getWindow().getAttributes();
+
+        boolean isPrimary = UserHandle.getCallingUserId() == UserHandle.USER_OWNER;
+
+        int powermenuAnimations = isPrimary ? getPowermenuAnimations() : 0;
+        switch (powermenuAnimations) {
+           case 0:
+              attrs.windowAnimations = R.style.GlobalActionsAnimationEnter;
+              attrs.gravity = Gravity.CENTER|Gravity.CENTER_HORIZONTAL;
+           break;
+           case 1:
+              attrs.windowAnimations = R.style.GlobalActionsAnimation;
+              attrs.gravity = Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL;
+           break;
+           case 2:
+              attrs.windowAnimations = R.style.GlobalActionsAnimationTop;
+              attrs.gravity = Gravity.TOP|Gravity.CENTER_HORIZONTAL;
+           break;
+           case 3:
+              attrs.windowAnimations = R.style.GlobalActionsAnimationFly;
+              attrs.gravity = Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL;
+           break;
+           case 4:
+              attrs.windowAnimations = R.style.GlobalActionsAnimationTn;
+              attrs.gravity = Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL;
+           break;
+           case 5:
+              attrs.windowAnimations = R.style.GlobalActionsAnimationTranslucent;
+              attrs.gravity = Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL;
+           break;
+           case 6:
+              attrs.windowAnimations = R.style.GlobalActionsAnimationXylon;
+              attrs.gravity = Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL;
+           break;
+           case 7:
+              attrs.windowAnimations = R.style.GlobalActionsAnimationCard;
+              attrs.gravity = Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL;
+           break;
+           case 8:
+              attrs.windowAnimations = R.style.GlobalActionsAnimationTranslucent;
+              attrs.gravity = Gravity.TOP|Gravity.CENTER_HORIZONTAL;
+           break;
+           case 9:
+              attrs.windowAnimations = R.style.GlobalActionsAnimationTranslucent;
+              attrs.gravity = Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL;
+           break;
+           case 10:
+              attrs.windowAnimations = R.style.GlobalActionsAnimationRotate;
+              attrs.gravity = Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL;
+           break;
+        }
 
         // If we only have 1 item and it's a simple press action, just do this action.
         if (mAdapter.getCount() == 1
@@ -342,13 +394,17 @@ class GlobalActionsDialog implements DialogInterface.OnDismissListener,
                 && !(mAdapter.getItem(0) instanceof LongPressAction)) {
             ((SinglePressAction) mAdapter.getItem(0)).onPress();
         } else {
-            WindowManager.LayoutParams attrs = mDialog.getWindow().getAttributes();
             attrs.setTitle("ActionsDialog");
             attrs.layoutInDisplayCutoutMode = LAYOUT_IN_DISPLAY_CUTOUT_MODE_ALWAYS;
             mDialog.getWindow().setAttributes(attrs);
             mDialog.show();
             mWindowManagerFuncs.onGlobalActionsShown();
         }
+    }
+
+    private int getPowermenuAnimations() {
+        return Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.POWER_MENU_ANIMATIONS, 0);
     }
 
     /**
