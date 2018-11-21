@@ -1308,6 +1308,7 @@ public final class Settings {
     public static final String
             ACTION_SHOW_REGULATORY_INFO = "android.settings.SHOW_REGULATORY_INFO";
 
+
     /**
      * Activity Action: Show Device Name Settings.
      * <p>
@@ -4849,6 +4850,20 @@ public final class Settings {
          * @hide
          */
         public static final String FULL_GESTURE_NAVBAR_DT2S = "full_gesture_navbar_dt2s";
+
+        /**
+         * Hold current font name and name of the originating package Uses "|" as a delimiter
+         *
+         * @hide
+         */
+        public static final String FONT_INFO = "font_info";
+
+         /**
+         * Hold list of installed font provider packages. Uses "|" as a delimiter
+         *
+         * @hide
+         */
+        public static final String FONT_PACKAGES = "font_packages";
 
         /**
          * Settings to backup. This is here so that it's in the same place as the settings
@@ -14224,3 +14239,4 @@ public final class Settings {
         return packages[0];
     }
 }
+
