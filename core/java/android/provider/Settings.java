@@ -4167,31 +4167,14 @@ public final class Settings {
          *
          * @hide
          */
-        public static final String OMNI_BUTTON_EXTRA_KEY_MAPPING = "button_extra_mapping";
-
-        /** @hide */
-        private static final Validator OMNI_BUTTON_EXTRA_KEY_MAPPING_VALIDATOR =
-                ANY_STRING_VALIDATOR;
+        public static final String BUTTON_EXTRA_KEY_MAPPING = "button_extra_mapping";
 
         /**
          * Enable proxi check for wake keys - must be implemented in a device
          * KeyHandler
          * @hide
          */
-        public static final String OMNI_DEVICE_PROXI_CHECK_ENABLED = "device_proxi_check_enabled";
-
-        /** @hide */
-        private static final Validator OMNI_DEVICE_PROXI_CHECK_ENABLED_VALIDATOR =
-                BOOLEAN_VALIDATOR;
-
-        /**
-         * @hide
-         */
-        public static final String OMNI_DEVICE_FEATURE_SETTINGS = "device_feature_settings";
-
-        /** @hide */
-        private static final Validator OMNI_DEVICE_FEATURE_SETTINGS_VALIDATOR =
-                ANY_STRING_VALIDATOR;
+        public static final String DEVICE_PROXI_CHECK_ENABLED = "device_proxi_check_enabled";
 
         /**
          * Indicates whether ANBI (Accidental navigation button interaction) is enabled.
@@ -4916,9 +4899,6 @@ public final class Settings {
             OMNI_QS_QUICKBAR_COLUMNS,
             OMNI_QS_PANEL_BG_ALPHA,
             OMNI_USE_BOTTOM_GESTURE_NAVIGATION,
-            OMNI_BUTTON_EXTRA_KEY_MAPPING,
-            OMNI_DEVICE_PROXI_CHECK_ENABLED,
-            OMNI_DEVICE_FEATURE_SETTINGS,
             STATUS_BAR_CLOCK,
             STATUSBAR_CLOCK_STYLE,
             STATUS_BAR_CLOCK_SECONDS,
@@ -5053,9 +5033,6 @@ public final class Settings {
             PRIVATE_SETTINGS.add(OMNI_QS_QUICKBAR_COLUMNS);
             PRIVATE_SETTINGS.add(OMNI_QS_PANEL_BG_ALPHA);
             PRIVATE_SETTINGS.add(OMNI_USE_BOTTOM_GESTURE_NAVIGATION);
-            PRIVATE_SETTINGS.add(OMNI_BUTTON_EXTRA_KEY_MAPPING);
-            PRIVATE_SETTINGS.add(OMNI_DEVICE_PROXI_CHECK_ENABLED);
-            PRIVATE_SETTINGS.add(OMNI_DEVICE_FEATURE_SETTINGS);
             PRIVATE_SETTINGS.add(STATUS_BAR_CLOCK);
             PRIVATE_SETTINGS.add(STATUSBAR_CLOCK_STYLE);
             PRIVATE_SETTINGS.add(STATUS_BAR_CLOCK_SECONDS);
@@ -5164,9 +5141,6 @@ public final class Settings {
             VALIDATORS.put(OMNI_QS_PANEL_BG_ALPHA, OMNI_QS_PANEL_BG_ALPHA_VALIDATOR);
             VALIDATORS.put(OMNI_USE_BOTTOM_GESTURE_NAVIGATION,
                     OMNI_USE_BOTTOM_GESTURE_NAVIGATION_VALIDATOR);
-            VALIDATORS.put(OMNI_BUTTON_EXTRA_KEY_MAPPING, OMNI_BUTTON_EXTRA_KEY_MAPPING_VALIDATOR);
-            VALIDATORS.put(OMNI_DEVICE_PROXI_CHECK_ENABLED, OMNI_DEVICE_PROXI_CHECK_ENABLED_VALIDATOR);
-            VALIDATORS.put(OMNI_DEVICE_FEATURE_SETTINGS, OMNI_DEVICE_FEATURE_SETTINGS_VALIDATOR);
             VALIDATORS.put(STATUS_BAR_CLOCK, STATUS_BAR_CLOCK_VALIDATOR);
             VALIDATORS.put(STATUSBAR_CLOCK_STYLE, STATUSBAR_CLOCK_STYLE_VALIDATOR);
             VALIDATORS.put(STATUS_BAR_CLOCK_SECONDS, STATUS_BAR_CLOCK_SECONDS_VALIDATOR);
