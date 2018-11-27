@@ -1137,7 +1137,6 @@ public class StatusBar extends SystemUI implements DemoMode,
         filter.addAction(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
         filter.addAction(Intent.ACTION_SCREEN_OFF);
         filter.addAction(DevicePolicyManager.ACTION_SHOW_DEVICE_MONITORING_DIALOG);
-        filter.addAction(StagUtils.ACTION_DISMISS_KEYGUARD);
         filter.addAction("android.intent.action.SCREEN_CAMERA_GESTURE");
         context.registerReceiverAsUser(mBroadcastReceiver, UserHandle.ALL, filter, null, null);
 
@@ -3307,12 +3306,7 @@ public class StatusBar extends SystemUI implements DemoMode,
             else if (DevicePolicyManager.ACTION_SHOW_DEVICE_MONITORING_DIALOG.equals(action)) {
                 mQSPanel.showDeviceMonitoringDialog();
             }
-            else if (StagUtils.ACTION_DISMISS_KEYGUARD.equals(action)) {
-                if (intent.hasExtra(StagUtils.DISMISS_KEYGUARD_EXTRA_INTENT)) {
-                    Intent launchIntent = (Intent) intent.getParcelableExtra(StagUtils.DISMISS_KEYGUARD_EXTRA_INTENT);
-                    startActivityDismissingKeyguard(launchIntent, true, true);
-                }
-            } else if ("android.intent.action.SCREEN_CAMERA_GESTURE".equals(action)) {
+	    else if ("android.intent.action.SCREEN_CAMERA_GESTURE".equals(action)) {
                 boolean userSetupComplete = Settings.Secure.getInt(mContext.getContentResolver(),
                         Settings.Secure.USER_SETUP_COMPLETE, 0) != 0;
                 if (!userSetupComplete) {

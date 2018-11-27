@@ -34,6 +34,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.hardware.input.InputManager;
 import android.os.Handler;
 import android.os.Looper;
+import android.content.pm.PackageManager;
 import android.os.PowerManager;
 import android.os.RemoteException;
 import android.os.ServiceManager;
