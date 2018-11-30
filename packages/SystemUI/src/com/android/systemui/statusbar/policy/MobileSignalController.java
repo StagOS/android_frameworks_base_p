@@ -24,6 +24,8 @@ import android.database.ContentObserver;
 import android.net.NetworkCapabilities;
 import android.os.Handler;
 import android.os.Looper;
+
+import android.provider.Settings;
 import android.provider.Settings.Global;
 import android.telephony.ims.ImsReasonInfo;
 import android.telephony.ims.stub.ImsRegistrationImplBase;
@@ -36,7 +38,6 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.SparseArray;
-
 import com.android.ims.ImsException;
 import com.android.ims.ImsManager;
 import com.android.internal.annotations.VisibleForTesting;
@@ -308,15 +309,9 @@ public class MobileSignalController extends SignalController<
 
     private int getVolteResId() {
         int resId = 0;
-        int voiceNetTye = getVoiceNetworkType();
 
         if ( mCurrentState.imsResitered ) {
             resId = R.drawable.ic_volte;
-        }else if ( mDataNetType == TelephonyManager.NETWORK_TYPE_LTE
-                    || mDataNetType == TelephonyManager.NETWORK_TYPE_LTE_CA
-                    || voiceNetTye  == TelephonyManager.NETWORK_TYPE_LTE
-                    || voiceNetTye  == TelephonyManager.NETWORK_TYPE_LTE_CA) {
-            resId = R.drawable.ic_volte_no_voice;
         }
         return resId;
     }
@@ -364,7 +359,7 @@ public class MobileSignalController extends SignalController<
         int volteIcon = mConfig.showVolteIcon && isEnhanced4gLteModeSettingEnabled()
                 ? getVolteResId() : 0;
         callback.setMobileDataIndicators(statusIcon, qsIcon, typeIcon, qsTypeIcon,
-                activityIn, activityOut, volteicon, dataContentDescription, description, icons.mIsWide,
+                activityIn, activityOut, volteIcon, dataContentDescription, description, icons.mIsWide,
                 mSubscriptionInfo.getSubscriptionId(), mCurrentState.roaming);
 
     }
@@ -627,14 +622,6 @@ public class MobileSignalController extends SignalController<
             updateTelephony();
         }
 
-        @Override
-        public void onCallStateChanged(int state, String phoneNumber) {
-            if (DEBUG) {
-                Log.d(mTag, "onCallStateChanged: state=" + state);
-            }
-            mCallState = state;
-            updateTelephony();
-        }
     };
 
     private final ImsRegistrationImplBase.Callback mImsRegistrationCallback =
