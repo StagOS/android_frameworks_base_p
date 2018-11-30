@@ -1,4 +1,4 @@
- /*
+/*
  * Copyright (C) 2006 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -5621,6 +5621,17 @@ public final class Settings {
          */
         public static final String LOCKSCREEN_ALBUM_ART_FILTER = "lockscreen_album_art_filter";
 
+       /**
+         * Settings dashboard icon style
+         * @hide
+         */
+        public static final String THEMING_SETTINGS_DASHBOARD_ICONS =
+                "theming_settings_dashboard_icons";
+
+        /** @hide */
+        public static final Validator THEMING_SETTINGS_DASHBOARD_ICONS_VALIDATOR =
+                ANY_INTEGER_VALIDATOR;
+
         /**
          * Control how to handle the display cutout
          * @hide
@@ -5880,7 +5891,8 @@ public final class Settings {
             DISPLAY_CUTOUT_MODE,
             STOCK_STATUSBAR_IN_HIDE,
             DOZE_ON_CHARGE,
-            OMNI_CUSTOM_FP_ICON
+            OMNI_CUSTOM_FP_ICON,
+            THEMING_SETTINGS_DASHBOARD_ICONS,
         };
 
         /**
@@ -6048,6 +6060,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(LIVE_DISPLAY_HINTED);
             PRIVATE_SETTINGS.add(DOZE_ON_CHARGE);
             PRIVATE_SETTINGS.add(OMNI_CUSTOM_FP_ICON);
+            PRIVATE_SETTINGS.add(THEMING_SETTINGS_DASHBOARD_ICONS);
         }
 
 
@@ -6194,6 +6207,7 @@ public final class Settings {
             VALIDATORS.put(LIVE_DISPLAY_HINTED, LIVE_DISPLAY_HINTED_VALIDATOR);
             VALIDATORS.put(DOZE_ON_CHARGE, DOZE_ON_CHARGE_VALIDATOR);
             VALIDATORS.put(OMNI_CUSTOM_FP_ICON, OMNI_CUSTOM_FP_ICON_VALIDATOR);
+            VALIDATORS.put(THEMING_SETTINGS_DASHBOARD_ICONS, THEMING_SETTINGS_DASHBOARD_ICONS_VALIDATOR);
         }
 
         /**
