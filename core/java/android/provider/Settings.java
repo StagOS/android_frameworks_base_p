@@ -4698,8 +4698,23 @@ public final class Settings {
                 "use_bottom_gesture_navigation";
 
         /** @hide */
-        private static final Validator OMNI_USE_BOTTOM_GESTURE_NAVIGATION_VALIDATOR =
-                BOOLEAN_VALIDATOR;
+        private static final Validator OMNI_USE_BOTTOM_GESTURE_NAVIGATION_VALIDATOR = BOOLEAN_VALIDATOR;
+
+        /**
+         * @hide
+         */
+        public static final String BOTTOM_GESTURE_TRIGGER_TIMEOUT = "bottom_gesture_navigation_trigger_timeout";
+
+        /** @hide */
+        private static final Validator BOTTOM_GESTURE_TRIGGER_TIMEOUT_VALIDATOR = ANY_INTEGER_VALIDATOR;
+
+        /**
+         * @hide
+         */
+        public static final String BOTTOM_GESTURE_SWIPE_LIMIT = "bottom_gesture_navigation_swipe_limit";
+
+        /** @hide */
+        private static final Validator BOTTOM_GESTURE_SWIPE_LIMIT_VALIDATOR = ANY_INTEGER_VALIDATOR;
 
         /**
          * @hide
@@ -6141,6 +6156,8 @@ public final class Settings {
             PRIVATE_SETTINGS.add(OMNI_QS_PANEL_BG_ALPHA);
             PRIVATE_SETTINGS.add(ACCELEROMETER_ROTATION_ANGLES);
             PRIVATE_SETTINGS.add(OMNI_USE_BOTTOM_GESTURE_NAVIGATION);
+            PRIVATE_SETTINGS.add(BOTTOM_GESTURE_TRIGGER_TIMEOUT);
+            PRIVATE_SETTINGS.add(BOTTOM_GESTURE_SWIPE_LIMIT);
             PRIVATE_SETTINGS.add(ONE_HAND_MODE_ENABLED);
             PRIVATE_SETTINGS.add(STATUS_BAR_CLOCK);
             PRIVATE_SETTINGS.add(STATUSBAR_CLOCK_STYLE);
@@ -6282,6 +6299,8 @@ public final class Settings {
             VALIDATORS.put(OMNI_QS_PANEL_BG_ALPHA, OMNI_QS_PANEL_BG_ALPHA_VALIDATOR);
             VALIDATORS.put(OMNI_USE_BOTTOM_GESTURE_NAVIGATION,
                     OMNI_USE_BOTTOM_GESTURE_NAVIGATION_VALIDATOR);
+            VALIDATORS.put(BOTTOM_GESTURE_TRIGGER_TIMEOUT, BOTTOM_GESTURE_TRIGGER_TIMEOUT_VALIDATOR);
+            VALIDATORS.put(BOTTOM_GESTURE_SWIPE_LIMIT, BOTTOM_GESTURE_SWIPE_LIMIT_VALIDATOR);
             VALIDATORS.put(ONE_HAND_MODE_ENABLED, ONE_HAND_MODE_ENABLED_VALIDATOR);
             VALIDATORS.put(ACCELEROMETER_ROTATION_ANGLES, ACCELEROMETER_ROTATION_ANGLES_VALIDATOR);
             VALIDATORS.put(STATUS_BAR_CLOCK, STATUS_BAR_CLOCK_VALIDATOR);
