@@ -5000,7 +5000,7 @@ public final class Settings {
             OMNI_USE_BOTTOM_GESTURE_NAVIGATION,
             ONE_HAND_MODE_ENABLED,
             ACCELEROMETER_ROTATION_ANGLES,
-            RECENTS_COMPONENT
+            RECENTS_COMPONENT,
             STATUS_BAR_CLOCK,
             STATUSBAR_CLOCK_STYLE,
             STATUS_BAR_CLOCK_SECONDS,
