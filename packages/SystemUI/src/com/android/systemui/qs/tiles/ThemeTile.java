@@ -35,7 +35,7 @@ import android.widget.ListView;
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.statusbar.ThemeAccentUtils;
-import com.android.internal.util.stag.STAGUtils;
+import com.android.internal.util.stag.StagUtils;
 
 import com.android.systemui.Prefs;
 import com.android.systemui.R;
@@ -349,7 +349,7 @@ public class ThemeTile extends QSTileImpl<BooleanState> {
 
     @Override
     public boolean isAvailable() {
-        return !STAGUtils.isPackageInstalled(mContext, SUBS_PACKAGE);
+        return !StagUtils.isPackageInstalled(mContext, SUBS_PACKAGE);
     }
 
     @Override

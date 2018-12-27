@@ -43,7 +43,7 @@ import android.view.WindowManagerPolicyConstants.PointerEventListener;
 import android.view.inputmethod.InputMethodManagerInternal;
 
 import com.android.internal.R;
-import com.android.internal.util.stag.STAGUtils;
+import com.android.internal.util.stag.StagUtils;
 import com.android.internal.util.stag.TaskUtils;
 import com.android.server.LocalServices;
 
@@ -278,7 +278,7 @@ public class GestureButton implements PointerEventListener {
     }
 
     private void triggerGestureVirtualKeypress(int keyCode) {
-        STAGUtils.sendKeycode(keyCode);
+        StagUtils.sendKeycode(keyCode);
     }
 
     void navigationBarPosition(int displayWidth, int displayHeight, int displayRotation) {

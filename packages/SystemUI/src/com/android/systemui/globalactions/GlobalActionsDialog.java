@@ -95,7 +95,7 @@ import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.internal.telephony.TelephonyProperties;
-import com.android.internal.util.stag.STAGUtils;
+import com.android.internal.util.stag.StagUtils;
 import com.android.internal.util.EmergencyAffordanceManager;
 import com.android.internal.util.ScreenshotHelper;
 import com.android.internal.widget.LockPatternUtils;
@@ -692,7 +692,7 @@ class GlobalActionsDialog implements DialogInterface.OnDismissListener,
             mHandler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    STAGUtils.takeScreenshot(true);
+                    StagUtils.takeScreenshot(true);
                 }
             }, 500);
         }
@@ -703,7 +703,7 @@ class GlobalActionsDialog implements DialogInterface.OnDismissListener,
             mHandler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    STAGUtils.takeScreenshot(false);
+                    StagUtils.takeScreenshot(false);
                 }
             }, 500);
             return true;

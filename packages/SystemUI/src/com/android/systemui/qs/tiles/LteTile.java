@@ -67,7 +67,7 @@ public class LteTile extends QSTileImpl<BooleanState> {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.KCUF_SETTINGS;
+        return MetricsEvent.HORNS;
     }
 
     @Override
