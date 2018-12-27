@@ -144,7 +144,7 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.statusbar.IStatusBarService;
 import com.android.internal.statusbar.NotificationVisibility;
 import com.android.internal.statusbar.StatusBarIcon;
-import com.android.internal.util.stag.STAGUtils;
+import com.android.internal.util.stag.StagUtils;
 import com.android.internal.statusbar.ThemeAccentUtils;
 import com.android.internal.util.hwkeys.ActionConstants;
 import com.android.internal.util.hwkeys.ActionUtils;
@@ -760,8 +760,8 @@ public class StatusBar extends SystemUI implements DemoMode,
 
         createAndAddWindows();
 
-        mSTAGSettingsObserver.observe();
-        mSTAGSettingsObserver.update();
+        mHornsObserver.observe();
+        mHornsObserver.update();
 
         // Make sure we always have the most current wallpaper info.
         IntentFilter wallpaperChangedFilter = new IntentFilter(Intent.ACTION_WALLPAPER_CHANGED);
@@ -1130,7 +1130,7 @@ public class StatusBar extends SystemUI implements DemoMode,
         filter.addAction(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
         filter.addAction(Intent.ACTION_SCREEN_OFF);
         filter.addAction(DevicePolicyManager.ACTION_SHOW_DEVICE_MONITORING_DIALOG);
-        filter.addAction(STAGUtils.ACTION_DISMISS_KEYGUARD);
+        filter.addAction(StagUtils.ACTION_DISMISS_KEYGUARD);
         filter.addAction("android.intent.action.SCREEN_CAMERA_GESTURE");
         context.registerReceiverAsUser(mBroadcastReceiver, UserHandle.ALL, filter, null, null);
 
@@ -3274,9 +3274,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             else if (DevicePolicyManager.ACTION_SHOW_DEVICE_MONITORING_DIALOG.equals(action)) {
                 mQSPanel.showDeviceMonitoringDialog();
             }
-            else if (STAGUtils.ACTION_DISMISS_KEYGUARD.equals(action)) {
-                if (intent.hasExtra(STAGUtils.DISMISS_KEYGUARD_EXTRA_INTENT)) {
-                    Intent launchIntent = (Intent) intent.getParcelableExtra(STAGUtils.DISMISS_KEYGUARD_EXTRA_INTENT);
+            else if (StagUtils.ACTION_DISMISS_KEYGUARD.equals(action)) {
+                if (intent.hasExtra(StagUtils.DISMISS_KEYGUARD_EXTRA_INTENT)) {
+                    Intent launchIntent = (Intent) intent.getParcelableExtra(StagUtils.DISMISS_KEYGUARD_EXTRA_INTENT);
                     startActivityDismissingKeyguard(launchIntent, true, true);
                 }
             } else if ("android.intent.action.SCREEN_CAMERA_GESTURE".equals(action)) {
@@ -4860,9 +4860,9 @@ public class StatusBar extends SystemUI implements DemoMode,
         }
     };
 
-    private STAGSettingsObserver mSTAGSettingsObserver = new STAGSettingsObserver(mHandler);
-    private class STAGSettingsObserver extends ContentObserver {
-        STAGSettingsObserver(Handler handler) {
+    private HornsObserver mHornsObserver = new HornsObserver(mHandler);
+    private class HornsObserver extends ContentObserver {
+        HornsObserver(Handler handler) {
             super(handler);
         }
 
