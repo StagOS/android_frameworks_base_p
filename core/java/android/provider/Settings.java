@@ -4385,11 +4385,23 @@ public final class Settings {
          */
         public static final String BATTERY_LIGHT_ENABLED = "battery_light_enabled";
 
-        /**
+       /**
         * Whether to show battery light when DND mode is active
         * @hide
         */
        public static final String BATTERY_LIGHT_ALLOW_ON_DND = "battery_light_allow_on_dnd";
+
+        /**
+         * Whether to hide the lockscreen clock
+         * @hide
+         */
+        public static final String LOCKSCREEN_CLOCK = "lockscreen_clock";
+
+        /**
+         * Whether to hide the items underneath the lockscreen clock
+         * @hide
+         */
+        public static final String LOCKSCREEN_INFO = "lockscreen_info";
 
         /**
         * Whether to show blinking light when battery is low
