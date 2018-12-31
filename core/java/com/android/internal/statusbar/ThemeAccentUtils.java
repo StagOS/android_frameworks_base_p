@@ -97,10 +97,21 @@ public class ThemeAccentUtils {
     };
 
     private static final String[] QS_TILE_THEMES = {
-        "com.android.systemui.qstile.default", // 0
-        "com.android.systemui.qstile.circletrim", // 1
-        "com.android.systemui.qstile.twotonecircletrim", // 2
-        "com.android.systemui.qstile.squircletrim", // 3
+        "default_qstile", // 0
+        "com.android.systemui.qstile.squircle", // 1
+        "com.android.systemui.qstile.teardrop", // 2
+        "com.android.systemui.qstile.deletround", // 3
+        "com.android.systemui.qstile.inktober", // 4
+        "com.android.systemui.qstile.shishunights", // 5
+        "com.android.systemui.qstile.circlegradient", // 6
+        "com.android.systemui.qstile.wavey", // 7
+        "com.android.systemui.qstile.circledualtone", // 8
+        "com.android.systemui.qstile.squaremedo", // 9
+        "com.android.systemui.qstile.pokesign", // 10
+        "com.android.systemui.qstile.ninja", // 11
+        "com.android.systemui.qstile.dottedcircle", // 12
+        "com.android.systemui.qstile.shishuink", // 13
+        "com.android.systemui.qstile.attemptmountain", // 14
     };
 
     private static final String STOCK_DARK_THEME = "com.android.systemui.theme.dark";
