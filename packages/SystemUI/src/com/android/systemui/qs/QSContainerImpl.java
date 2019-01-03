@@ -58,6 +58,7 @@ public class QSContainerImpl extends FrameLayout {
     private boolean mQsDisabled;
 
     private Drawable mQsBackGround;
+    private int mQsBackGroundAlpha;
 
     public QSContainerImpl(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -122,18 +123,16 @@ public class QSContainerImpl extends FrameLayout {
     }
 
     private void updateSettings() {
-        int mQsBackGroundAlpha = Settings.System.getIntForUser(getContext().getContentResolver(),
+        mQsBackGroundAlpha = Settings.System.getIntForUser(getContext().getContentResolver(),
                 Settings.System.OMNI_QS_PANEL_BG_ALPHA, 255,
                 UserHandle.USER_CURRENT);
+        setQsBackground();
+    }
 
-        if (mQsBackGroundAlpha < 255 ) {
-            mBackground.setVisibility(View.INVISIBLE);
-            mBackgroundGradient.setVisibility(View.INVISIBLE);
+    private void setQsBackground() {
+        if (mQsBackGround != null) {
             mQsBackGround.setAlpha(mQsBackGroundAlpha);
-            setBackground(mQsBackGround);
-        } else {
-            mBackground.setVisibility(View.VISIBLE);
-            mBackgroundGradient.setVisibility(View.VISIBLE);
+            mBackground.setBackground(mQsBackGround);
         }
     }
 
