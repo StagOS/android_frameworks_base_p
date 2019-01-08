@@ -52,7 +52,7 @@
     <bool name="config_haveHigherAspectRatioScreen">false</bool>
     <item name="config_screenAspectRatio" format="float" type="dimen">2.1</item>
 
-    <integer name="config_buttonBrightnessSettingDefault">255</integer>
+    <integer name="config_buttonBrightnessSettingDefault">120</integer>
     <bool name="config_deviceHasVariableButtonBrightness">false</bool>
 
     <!-- Hardware keys present on the device, stored as a bit field.
