@@ -16,6 +16,7 @@
 
 package com.android.internal.util.stag;
 
+import android.app.ActivityManager;
 import android.Manifest;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
@@ -34,6 +35,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.hardware.input.InputManager;
+import android.media.AudioManager;
 import android.os.Handler;
 import android.os.Looper;
 import android.hardware.fingerprint.FingerprintManager;
@@ -135,21 +137,10 @@ public class StagUtils {
         }
     }
 
-
-    public static void toggleCameraFlash() {
-        FireActions.toggleCameraFlash();
-    }
-
-    public static void toggleCameraFlashOn() {
-        FireActions.toggleCameraFlashOn();
-    }
-     public static void toggleCameraFlashOff() {
-        FireActions.toggleCameraFlashOff();
-    }
-
     private static IStatusBarService mStatusBarService = null;
+
     private static IStatusBarService getStatusBarService() {
-        synchronized (FireActions.class) {
+        synchronized (StagUtils.class) {
             if (mStatusBarService == null) {
                 mStatusBarService = IStatusBarService.Stub.asInterface(
                         ServiceManager.getService("statusbar"));
@@ -200,53 +191,6 @@ public class StagUtils {
             wm.sendCustomAction(new Intent(full? INTENT_SCREENSHOT : INTENT_REGION_SCREENSHOT));
         } catch (RemoteException e) {
             e.printStackTrace();
-        }
-    }
-
-    private static final class FireActions {
-        private static IStatusBarService mStatusBarService = null;
-        private static IStatusBarService getStatusBarService() {
-            synchronized (FireActions.class) {
-                if (mStatusBarService == null) {
-                    mStatusBarService = IStatusBarService.Stub.asInterface(
-                            ServiceManager.getService("statusbar"));
-                }
-                return mStatusBarService;
-            }
-        }
-
-        public static void toggleCameraFlash() {
-            IStatusBarService service = getStatusBarService();
-            if (service != null) {
-                try {
-                    service.toggleCameraFlash();
-                } catch (RemoteException e) {
-                    // do nothing.
-                }
-
-            }
-        }
-
-        public static void toggleCameraFlashOn(){
-            IStatusBarService service = getStatusBarService();
-            if (service != null) {
-                try {
-                    service.toggleCameraFlashOn();
-                } catch (RemoteException e) {
-                    // do nothing.
-                }
-            }
-        }
-
-        public static void toggleCameraFlashOff(){
-            IStatusBarService service = getStatusBarService();
-            if (service != null) {
-                try {
-                    service.toggleCameraFlashOff();
-                } catch (RemoteException e) {
-                    // do nothing.
-                }
-            }
         }
     }
 
@@ -393,6 +337,57 @@ public class StagUtils {
      // Check to see if device supports A/B (seamless) system updates
     public static boolean isABdevice(Context context) {
         return SystemProperties.getBoolean("ro.build.ab_update", false);
+    }
+    public static void toggleVolumePanel(Context context) {
+        AudioManager am = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+        am.adjustVolume(AudioManager.ADJUST_SAME, AudioManager.FLAG_SHOW_UI);
+    }
+    // Toggle camera
+    public static void toggleCameraFlash() {
+        IStatusBarService service = getStatusBarService();
+        if (service != null) {
+            try {
+                service.toggleCameraFlash();
+            } catch (RemoteException e) {
+                // do nothing.
+            }
+        }
+    }
+
+    // Clear notifications
+    public static void clearAllNotifications() {
+        IStatusBarService service = getStatusBarService();
+        if (service != null) {
+            try {
+                service.onClearAllNotifications(ActivityManager.getCurrentUser());
+            } catch (RemoteException e) {
+                // do nothing.
+            }
+        }
+    }
+
+    // Toggle notifications panel
+    public static void toggleNotifications() {
+        IStatusBarService service = getStatusBarService();
+        if (service != null) {
+            try {
+                service.expandNotificationsPanel();
+            } catch (RemoteException e) {
+                // do nothing.
+            }
+        }
+    }
+
+    // Toggle qs panel
+    public static void toggleQsPanel() {
+        IStatusBarService service = getStatusBarService();
+        if (service != null) {
+            try {
+                service.expandSettingsPanel(null);
+            } catch (RemoteException e) {
+                // do nothing.
+            }
+        }
     }
 
     public static String batteryTemperature(Context context, Boolean ForC) {
