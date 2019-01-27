@@ -2424,8 +2424,8 @@ public class StatusBar extends SystemUI implements DemoMode,
     public void handleSystemKey(int key) {
         if (SPEW) Log.d(TAG, "handleNavigationKey: " + key);
 
-        if (KeyEvent.KEYCODE_MEDIA_PREVIOUS == key || KeyEvent.KEYCODE_MEDIA_NEXT == key) {
-            mMediaManager.onSkipTrackEvent(key, mHandler);
+        if (KeyEvent.KEYCODE_MEDIA_PAUSE == key) {
+            mMediaManager.onPlayPauseTrackEvent(key, mHandler);
             return;
         }
 
@@ -5678,7 +5678,7 @@ public class StatusBar extends SystemUI implements DemoMode,
         @Override
         public void onDoubleTap(float screenX, float screenY) {
             if (isDoubleTapOnMusicTicker(screenX, screenY)) {
-                handleSystemKey(KeyEvent.KEYCODE_MEDIA_NEXT);
+                handleSystemKey(KeyEvent.KEYCODE_MEDIA_PAUSE);
             } else {
                 for (Callback callback : mCallbacks) {
                     callback.wakeUpFromDoubleTapAod();

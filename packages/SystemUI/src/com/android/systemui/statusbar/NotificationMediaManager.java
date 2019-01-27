@@ -327,7 +327,7 @@ public class NotificationMediaManager implements Dumpable {
         }, 20);
     }
 
-    public void onSkipTrackEvent(int key, final Handler h) {
+    public void onPlayPauseTrackEvent(int key, final Handler h) {
         if (mMediaSessionManager != null) {
             final List<MediaController> sessions
                     = mMediaSessionManager.getActiveSessionsForUser(
