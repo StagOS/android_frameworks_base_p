@@ -1,0 +1,52 @@
+From 0a4c7e636195b7bd17d0479e2e4b10e1ba4fda50 Mon Sep 17 00:00:00 2001
+From: The-DarkBeast <pranay@firehound.org>
+Date: Sun, 27 Jan 2019 16:14:28 +0530
+Subject: [PATCH] base: AMT: Pause the current track instead of skipping on
+ double tap
+
+Signed-off-by: The-DarkBeast <pranay@firehound.org>
+---
+ .../systemui/statusbar/NotificationMediaManager.java        | 2 +-
+ .../src/com/android/systemui/statusbar/phone/StatusBar.java | 6 +++---
+ 2 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/packages/SystemUI/src/com/android/systemui/statusbar/NotificationMediaManager.java b/packages/SystemUI/src/com/android/systemui/statusbar/NotificationMediaManager.java
+index 0178989c06f..3ec20366ade 100644
+--- a/packages/SystemUI/src/com/android/systemui/statusbar/NotificationMediaManager.java
++++ b/packages/SystemUI/src/com/android/systemui/statusbar/NotificationMediaManager.java
+@@ -327,7 +327,7 @@ public class NotificationMediaManager implements Dumpable {
+         }, 20);
+     }
+ 
+-    public void onSkipTrackEvent(int key, final Handler h) {
++    public void onPlayPauseTrackEvent(int key, final Handler h) {
+         if (mMediaSessionManager != null) {
+             final List<MediaController> sessions
+                     = mMediaSessionManager.getActiveSessionsForUser(
+diff --git a/packages/SystemUI/src/com/android/systemui/statusbar/phone/StatusBar.java b/packages/SystemUI/src/com/android/systemui/statusbar/phone/StatusBar.java
+index 0ccc85fb1ed..a46cb5c6f70 100755
+--- a/packages/SystemUI/src/com/android/systemui/statusbar/phone/StatusBar.java
++++ b/packages/SystemUI/src/com/android/systemui/statusbar/phone/StatusBar.java
+@@ -2423,8 +2423,8 @@ public class StatusBar extends SystemUI implements DemoMode,
+     public void handleSystemKey(int key) {
+         if (SPEW) Log.d(TAG, "handleNavigationKey: " + key);
+ 
+-        if (KeyEvent.KEYCODE_MEDIA_PREVIOUS == key || KeyEvent.KEYCODE_MEDIA_NEXT == key) {
+-            mMediaManager.onSkipTrackEvent(key, mHandler);
++        if (KeyEvent.KEYCODE_MEDIA_PAUSE == key) {
++            mMediaManager.onPlayPauseTrackEvent(key, mHandler);
+             return;
+         }
+ 
+@@ -5635,7 +5635,7 @@ public class StatusBar extends SystemUI implements DemoMode,
+         @Override
+         public void onDoubleTap(float screenX, float screenY) {
+             if (isDoubleTapOnMusicTicker(screenX, screenY)) {
+-                handleSystemKey(KeyEvent.KEYCODE_MEDIA_NEXT);
++                handleSystemKey(KeyEvent.KEYCODE_MEDIA_PAUSE);
+             } else {
+                 for (Callback callback : mCallbacks) {
+                     callback.wakeUpFromDoubleTapAod();
+-- 
+2.17.1
+
