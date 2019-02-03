@@ -47,6 +47,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.android.systemui.R;
 import com.android.systemui.SysUiServiceProvider;
@@ -97,11 +98,13 @@ public class QSContainerImpl extends FrameLayout implements
 
     // omni additions start
     private boolean mHeaderImageEnabled;
+    private RelativeLayout mBackgroundImageBase;
     private ImageView mBackgroundImage;
     private StatusBarHeaderMachine mStatusBarHeaderMachine;
     private Drawable mCurrentBackground;
     private boolean mLandscape;
     private boolean mQsBackgroundAlpha;
+    private View mBackgroundImageShadow;
 
     public QSContainerImpl(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -129,8 +132,10 @@ public class QSContainerImpl extends FrameLayout implements
         mSideMargins = getResources().getDimensionPixelSize(R.dimen.notification_side_paddings);
         mQsBackGround = getContext().getDrawable(R.drawable.qs_background_primary);
         mColorExtractor = Dependency.get(SysuiColorExtractor.class);
+        mBackgroundImageBase = findViewById(R.id.qs_header_image_view_base);
         mBackgroundImage = findViewById(R.id.qs_header_image_view);
-        mBackgroundImage.setClipToOutline(true);
+        mBackgroundImageShadow = findViewById(R.id.quick_settings_header_shadow);
+        mBackgroundImageBase.setClipToOutline(true);
         updateSettings();
         updateResources();
 
@@ -498,12 +503,8 @@ public class QSContainerImpl extends FrameLayout implements
                 UserHandle.USER_CURRENT);
 
         if (mCurrentBackground != null) {
-            if (headerShadow != 0) {
-                int shadow = Color.argb(headerShadow, 0, 0, 0);
-                mCurrentBackground.setColorFilter(shadow, Mode.SRC_ATOP);
-            } else {
-                mCurrentBackground.setColorFilter(null);
-            }
+            float shadow = headerShadow / 255.0f;
+            mBackgroundImageShadow.setAlpha(shadow);
         }
     }
 
