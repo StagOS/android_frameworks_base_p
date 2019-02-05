@@ -309,6 +309,11 @@ public class SignalStrength implements Parcelable {
         mWcdmaDefaultSignalMeasurement = in.readString();
         in.readIntArray(mLteRsrpThresholds);
         in.readIntArray(mWcdmaRscpThresholds);
+        /* Hack signal strength */
+        if (mGsmSignalStrength < 27) mGsmSignalStrength += 3;
+        if (mLteSignalStrength < 91) mLteSignalStrength += 5;
+        if (mLteRsrp != INVALID && mLteRsrp > 49) mLteRsrp -= 5;
+        if (mLteRsrq != INVALID && mLteRsrq > 3) mLteRsrq -= 2;
     }
 
     /**
