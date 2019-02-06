@@ -223,6 +223,7 @@ public class StagUtils {
                 } catch (RemoteException e) {
                     // do nothing.
                 }
+
             }
         }
 
@@ -392,6 +393,11 @@ public class StagUtils {
      // Check to see if device supports A/B (seamless) system updates
     public static boolean isABdevice(Context context) {
         return SystemProperties.getBoolean("ro.build.ab_update", false);
+    }
+
+    // Check to see if device supports an alterative ambient display package
+    public static boolean hasAltAmbientDisplay(Context context) {
+        return context.getResources().getBoolean(com.android.internal.R.bool.config_alt_ambient_display);
     }
 
     public static String batteryTemperature(Context context, Boolean ForC) {
