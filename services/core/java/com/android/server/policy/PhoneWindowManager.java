@@ -290,6 +290,7 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.os.DeviceKeyHandler;
+import com.android.internal.os.AltDeviceKeyHandler;
 import com.android.internal.policy.IKeyguardDismissCallback;
 import com.android.internal.policy.IShortcutService;
 import com.android.internal.policy.KeyguardDismissCallback;
@@ -662,6 +663,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
     boolean mAllowStartActivityForLongPressOnPowerDuringSetup;
     MetricsLogger mLogger;
     private DeviceKeyHandler mDeviceKeyHandler;
+    private AltDeviceKeyHandler mAltDeviceKeyHandler;
     private HardkeyActionHandler mKeyHandler;
 
     private boolean mHandleVolumeKeysInWM;
@@ -2645,6 +2647,29 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                  Class<?> klass = loader.loadClass(deviceKeyHandlerClass);
                 Constructor<?> constructor = klass.getConstructor(Context.class);
                 mDeviceKeyHandler = (DeviceKeyHandler) constructor.newInstance(
+                        mContext);
+                if(DEBUG) Slog.d(TAG, "Device key handler loaded");
+            } catch (Exception e) {
+                Slog.w(TAG, "Could not instantiate device key handler "
+                        + deviceKeyHandlerClass + " from class "
+                        + deviceKeyHandlerLib, e);
+            }
+        }
+
+// AltDeviceKeyHandler
+        String AltdeviceKeyHandlerLib = mContext.getResources().getString(
+                com.android.internal.R.string.config_deviceKeyHandlerLib);
+
+        String AltdeviceKeyHandlerClass = mContext.getResources().getString(
+                com.android.internal.R.string.config_deviceKeyHandlerClass);
+
+        if (!deviceKeyHandlerLib.isEmpty() && !deviceKeyHandlerClass.isEmpty()) {
+            PathClassLoader loader =  new PathClassLoader(deviceKeyHandlerLib,
+                    getClass().getClassLoader());
+            try {
+                Class<?> klass = loader.loadClass(deviceKeyHandlerClass);
+                Constructor<?> constructor = klass.getConstructor(Context.class);
+                mAltDeviceKeyHandler = (AltDeviceKeyHandler) constructor.newInstance(
                         mContext);
                 if(DEBUG) Slog.d(TAG, "Device key handler loaded");
             } catch (Exception e) {
@@ -4711,13 +4736,28 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         if (mDeviceKeyHandler != null) {
             try {
                 // The device only will consume known keys.
-                if (mDeviceKeyHandler.canHandleKeyEvent(event)) {
+                event = mDeviceKeyHandler.handleKeyEvent(event);
+                if (event == null) {
                     return -1;
                 }
             } catch (Exception e) {
                 Slog.w(TAG, "Could not dispatch event to device key handler", e);
             }
         }
+
+        // Specific device key handling(Alt)
+        if (mAltDeviceKeyHandler != null) {
+            try {
+                // The device only should consume known keys.
+                event = mAltDeviceKeyHandler.handleKeyEvent(event);
+                if (event == null) {
+                    return -1;
+                }
+            } catch (Exception e) {
+                Slog.w(TAG, "Could not dispatch event to device key handler", e);
+            }
+        }
+
 
         if (down) {
             long shortcutCode = keyCode;
@@ -4845,6 +4885,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
             final int metaState = event.getMetaState();
             final boolean initialDown = event.getAction() == KeyEvent.ACTION_DOWN
                     && event.getRepeatCount() == 0;
+
 
             // Check for fallback actions specified by the key character map.
             final FallbackAction fallbackAction;
@@ -6976,6 +7017,21 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                 Slog.w(TAG, "Could not dispatch event to device key handler", e);
             }
         }
+
+        // Specific device key handling
+        if (mAltDeviceKeyHandler != null) {
+            try {
+                // The device only should consume known keys.
+                event = mAltDeviceKeyHandler.handleKeyEvent(event);
+                if (event == null) {
+
+                    return 0;
+                }
+            } catch (Exception e) {
+                Slog.w(TAG, "Could not dispatch event to device key handler", e);
+            }
+        }
+
 
         // Handle special keys.
         switch (keyCode) {
