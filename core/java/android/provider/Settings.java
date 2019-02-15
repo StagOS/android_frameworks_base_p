@@ -5467,6 +5467,7 @@ public final class Settings {
             QS_PANEL_BG_COLOR_WALL,
             QS_PANEL_BG_USE_WALL,
             QS_PANEL_BG_USE_FW,
+            NOTIFICATION_LIGHT_PULSE,
         };
 
         /**
@@ -5725,6 +5726,7 @@ public final class Settings {
             VALIDATORS.put(QS_PANEL_BG_COLOR_WALL, QS_PANEL_BG_COLOR_WALL_VALIDATOR);
             VALIDATORS.put(QS_PANEL_BG_USE_WALL, QS_PANEL_BG_USE_WALL_VALIDATOR);
             VALIDATORS.put(QS_PANEL_BG_USE_FW, QS_PANEL_BG_USE_FW_VALIDATOR);
+            VALIDATORS.put(NOTIFICATION_LIGHT_PULSE, BOOLEAN_VALIDATOR);
         }
 
         /**
@@ -9968,6 +9970,8 @@ public final class Settings {
             VALIDATORS.put(STATUS_BAR_BATTERY_STYLE, STATUS_BAR_BATTERY_STYLE_VALIDATOR);
             VALIDATORS.put(LOCK_POWER_MENU_DISABLED, LOCK_POWER_MENU_DISABLED_VALIDATOR);
             VALIDATORS.put(VOLUME_LINK_NOTIFICATION, VOLUME_LINK_NOTIFICATION_VALIDATOR);
+            VALIDATORS.put(LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS, BOOLEAN_VALIDATOR);
+            VALIDATORS.put(LOCK_SCREEN_SHOW_NOTIFICATIONS, BOOLEAN_VALIDATOR);
         }
 
         /**
@@ -14594,6 +14598,7 @@ public final class Settings {
          * Supported keys:
          * compatibility_wal_supported      (boolean)
          * wal_syncmode       (String)
+         * truncate_size      (int)
          *
          * @hide
          */
