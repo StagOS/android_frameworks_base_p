@@ -5252,6 +5252,16 @@ public final class Settings {
         public static final String ANIM_TILE_DURATION = "anim_tile_duration";
 
         /**
+         * @hide
+         */
+        public static final String SMART_CHARGING = "smart_charging";
+
+        /**
+         * @hide
+         */
+        public static final String SMART_CHARGING_LEVEL = "smart_charging_level";
+
+	/**
          * Change quick settings tiles interpolator
          * @hide
          */
