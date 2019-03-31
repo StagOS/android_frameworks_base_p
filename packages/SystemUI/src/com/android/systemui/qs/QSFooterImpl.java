@@ -142,6 +142,7 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
         addOnLayoutChangeListener((v, left, top, right, bottom, oldLeft, oldTop, oldRight,
                 oldBottom) -> updateAnimator(right - left));
         setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_YES);
+        updateEverything();
     }
 
     private void updateAnimator(int width) {
