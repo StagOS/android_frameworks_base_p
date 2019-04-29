@@ -4720,6 +4720,15 @@ public final class Settings {
         public static final Validator STATUS_BAR_CLOCK_SECONDS_VALIDATOR = BOOLEAN_VALIDATOR;
 
         /**
+         * Force full screen for devices with cutout
+         * @hide
+         */
+        public static final String FORCE_FULLSCREEN_CUTOUT_APPS = "force_full_screen_cutout_apps";
+
+        /** @hide */
+        private static final Validator FORCE_FULLSCREEN_CUTOUT_APPS_VALIDATOR = ANY_STRING_VALIDATOR;
+
+        /**
          * AM/PM Style for clock options
          * 0 - Normal AM/PM
          * 1 - Small AM/PM
@@ -5834,6 +5843,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(STATUS_BAR_CUSTOM_HEADER_PROVIDER);
             PRIVATE_SETTINGS.add(STATUS_BAR_CUSTOM_HEADER_IMAGE);
             PRIVATE_SETTINGS.add(STATUS_BAR_FILE_HEADER_IMAGE);
+            PRIVATE_SETTINGS.add(FORCE_FULLSCREEN_CUTOUT_APPS);
         }
 
 
@@ -5964,7 +5974,8 @@ public final class Settings {
                     STATUS_BAR_CUSTOM_HEADER_IMAGE_VALIDATOR);
             VALIDATORS.put(STATUS_BAR_FILE_HEADER_IMAGE,
                     STATUS_BAR_FILE_HEADER_IMAGE_VALIDATOR);
-        }
+            VALIDATORS.put(FORCE_FULLSCREEN_CUTOUT_APPS, FORCE_FULLSCREEN_CUTOUT_APPS_VALIDATOR);
+         }
 
         /**
          * These entries are considered common between the personal and the managed profile,
