@@ -9304,6 +9304,18 @@ public final class Settings {
                 "managed_profile_contact_remote_search";
 
         /**
+         * Lockscreen lavalamp psychedelic colors
+         * @hide
+         */
+        public static final String LOCKSCREEN_LAVALAMP_ENABLED = "lockscreen_lavalamp_enabled";
+
+        /**
+         * Lockscreen lavalamp animation speed
+         * @hide
+         */
+        public static final String LOCKSCREEN_LAVALAMP_SPEED = "lockscreen_lavalamp_speed";
+
+        /**
          * Whether or not the automatic storage manager is enabled and should run on the device.
          *
          * @hide
