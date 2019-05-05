@@ -16,13 +16,16 @@
 
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:gravity="center_vertical|fill_horizontal"
-          android:start="4dp"
-          android:end="4dp">
-        <shape android:shape="rectangle"
-               android:tint="@color/switch_track_material">
-            <corners android:radius="7dp" />
-            <solid android:color="@color/white_disabled_material" />
-            <size android:height="14dp" />
-        </shape>
-    </item>
+                 android:start="4dp"
+                 android:end="4dp">
+               <shape android:shape="rectangle" >
+                   <size android:height="14dp" android:width="5dp" />
+                   <corners android:radius="7dp" />
+	               <gravity android:gravity="center_vertical" />
+                  <solid android:color="@*android:color/transparent" />
+                  <stroke
+                       android:width="2dp"
+                       android:color="@*android:color/switch_track_material"/>
+               </shape>
+           </item>
 </layer-list>
