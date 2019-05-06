@@ -345,6 +345,8 @@ Navigator.OnVerticalChangedListener, KeyguardMonitor.Callback, NotificationMedia
 
         IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
         filter.addAction(Intent.ACTION_SCREEN_ON);
+	filter.addAction(Intent.ACTION_SCREEN_OFF);
+        filter.addAction(Intent.ACTION_BOOT_COMPLETED);
         filter.addAction(Intent.ACTION_USER_SWITCHED);
         filter.addAction(PowerManager.ACTION_POWER_SAVE_MODE_CHANGING);
         filter.addAction(AudioManager.STREAM_MUTE_CHANGED_ACTION);
@@ -352,7 +354,8 @@ Navigator.OnVerticalChangedListener, KeyguardMonitor.Callback, NotificationMedia
         getContext().registerReceiverAsUser(mBroadcastReceiver, UserHandle.ALL, filter, null, null);
         notifyNavigationBarScreenOn();
         mOverviewProxyService.addCallback(mOverviewProxyListener);
-	mNavigationBarView.notifyInflateFromUser();
+        mNavigationBarView.notifyInflateFromUser();
+        mPulseController.notifyScreenOn(true);
     }
 
     @Override
@@ -368,7 +371,7 @@ Navigator.OnVerticalChangedListener, KeyguardMonitor.Callback, NotificationMedia
         super.onSaveInstanceState(outState);
         outState.putInt(EXTRA_DISABLE_STATE, mDisabledFlags1);
         outState.putInt(EXTRA_DISABLE2_STATE, mDisabledFlags2);
-        if (mNavigationBarView != null) {
+	if (mNavigationBarView != null) {
             mNavigationBarView.getLightTransitionsController().saveState(outState);
         }
     }
@@ -1190,12 +1193,15 @@ Navigator.OnVerticalChangedListener, KeyguardMonitor.Callback, NotificationMedia
                 mPulseController.notifyScreenOn(false);
             } else if (Intent.ACTION_SCREEN_ON.equals(action)) {
                 notifyNavigationBarScreenOn();
-                mPulseController.notifyScreenOn(true);
+		mPulseController.notifyScreenOn(true);
             } else if (Intent.ACTION_USER_SWITCHED.equals(action)) {
                 // The accessibility settings may be different for the new user
                 updateAccessibilityServicesState(mAccessibilityManager);
             }
             mPulseController.onReceive(intent);
+	    if (mNavigationBarView != null) {
+                mNavigationBarView.onReceive(intent);
+            }
         }
     };
 
@@ -1402,6 +1408,7 @@ Navigator.OnVerticalChangedListener, KeyguardMonitor.Callback, NotificationMedia
             mNavigationBarView.setComponents(mRecents, mDivider, mStatusBar.getPanel());
             mNavigationBarView.setOnVerticalChangedListener(this::onVerticalChanged);
             mNavigationBarView.notifyInflateFromUser();
+	    mPulseController.notifyScreenOn(true);
             mLightBarController
                     .setNavigationBar(mNavigationBarView.getLightTransitionsController());
             if (isUsingStockNav()) {
