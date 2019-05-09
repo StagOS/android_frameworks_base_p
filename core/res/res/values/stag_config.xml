@@ -141,4 +141,6 @@
       <item>com.snapchat.android</item>
       </string-array>
 
+    <!-- Whether device ignores the RSSNR signal implementation -->
+    <bool name="config_ignoreRssnrSignalLevel">false</bool>
 </resources>
