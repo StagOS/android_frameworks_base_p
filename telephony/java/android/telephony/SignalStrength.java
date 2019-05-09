@@ -907,6 +907,11 @@ public class SignalStrength implements Parcelable {
                 if (rsrpIconLevel != -1) return rsrpIconLevel;
             }
 
+  	    /* Ignore RSSNR for now */
+            if(rsrpIconLevel != -1) return rsrpIconLevel;
+
+
+
             /* Choose a measurement type to use for notification */
             if (snrIconLevel != -1 && rsrpIconLevel != -1) {
                 /*
