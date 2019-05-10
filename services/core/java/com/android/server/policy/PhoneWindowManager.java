@@ -3774,6 +3774,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                         || attrs.hideTimeoutMilliseconds > TOAST_WINDOW_TIMEOUT) {
                     attrs.hideTimeoutMilliseconds = TOAST_WINDOW_TIMEOUT;
                 }
+                attrs.flags |= WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE;
                 switch(Settings.System.getInt(mContext.getContentResolver(), Settings.System.TOAST_ANIMATION, 1)) {
                 case 0:
                         attrs.windowAnimations = -1;
@@ -3823,8 +3824,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                 case 15:
                         attrs.windowAnimations = com.android.internal.R.style.Animation_Toast_SlideRightLeft;
                         break;
-                attrs.flags |= WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE;
-                break;
         }
     }
 
