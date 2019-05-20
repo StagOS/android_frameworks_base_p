@@ -5023,12 +5023,6 @@ public final class Settings {
 
         /**
          * @hide
-         */
-        public static final String FULL_GESTURE_NAVBAR = "full_gesture_navbar";
-
-
-        /**
-         * @hide
          * Which kind of style you might want to see on Recents UI
          * 0 - Pie Recents (Quickstep)
          * 1 - Oreo Recents (SystemUI)
