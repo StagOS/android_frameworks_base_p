@@ -155,6 +155,7 @@ import com.android.internal.util.hwkeys.ActionUtils;
 import com.android.internal.util.hwkeys.PackageMonitor;
 import com.android.internal.util.hwkeys.PackageMonitor.PackageChangedListener;
 import com.android.internal.util.hwkeys.PackageMonitor.PackageState;
+import com.android.internal.util.hwkeys.ImageHelper;
 import com.android.internal.utils.SmartPackageMonitor;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.MessagingGroup;
@@ -403,6 +404,7 @@ public class StatusBar extends SystemUI implements DemoMode,
     protected FingerprintUnlockController mFingerprintUnlockController;
     private LightBarController mLightBarController;
     protected LockscreenWallpaper mLockscreenWallpaper;
+    private int mAlbumArtFilter;
 
     private int mNaturalBarHeight = -1;
 
@@ -1806,7 +1808,17 @@ public class StatusBar extends SystemUI implements DemoMode,
                 // might still be null
             }
             if (artworkBitmap != null) {
-                artworkDrawable = new BitmapDrawable(mBackdropBack.getResources(), artworkBitmap);
+                 switch (mAlbumArtFilter) {
+                    case 1:
+                        artworkDrawable = new BitmapDrawable(mBackdropBack.getResources(), ImageHelper.toGrayscale(artworkBitmap));
+                        break;
+                    case 2:
+                        artworkDrawable = new BitmapDrawable(mBackdropBack.getResources(), ImageHelper.getBlurredImage(mContext, artworkBitmap));
+                        break;
+                    case 0:
+                    default:
+                        artworkDrawable = new BitmapDrawable(mBackdropBack.getResources(), artworkBitmap);
+                }
             }
         }
         mKeyguardShowingMedia = artworkDrawable != null;
@@ -5231,6 +5243,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.Secure.AMBIENT_VISUALIZER_ENABLED),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.LOCKSCREEN_ALBUM_ART_FILTER),
+                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -5281,7 +5296,10 @@ public class StatusBar extends SystemUI implements DemoMode,
             } else if (uri.equals(Settings.Secure.getUriFor(
                 Settings.Secure.AMBIENT_VISUALIZER_ENABLED))) {
                 setAmbientVis();
-            }
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.LOCKSCREEN_ALBUM_ART_FILTER))) {
+                updateLockscreenFilter();
+        }
             update();
         }
 
@@ -5303,6 +5321,7 @@ public class StatusBar extends SystemUI implements DemoMode,
 	            Settings.System.OMNI_USE_OLD_MOBILETYPE, 0,
         	    UserHandle.USER_CURRENT) != 0;
             TelephonyIcons.updateIcons(USE_OLD_MOBILETYPE);
+            updateLockscreenFilter();
         }
     }
 
@@ -5316,6 +5335,13 @@ public class StatusBar extends SystemUI implements DemoMode,
                     Settings.System.HEADS_UP_BLACKLIST_VALUES);
         splitAndAddToArrayList(mBlacklist, blackString, "\\|");
     }
+
+    private void updateLockscreenFilter() {
+        mAlbumArtFilter = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.LOCKSCREEN_ALBUM_ART_FILTER, 0,
+                UserHandle.USER_CURRENT);
+    }
+
 
     private void setQsPanelOptions() {
         if (mQSPanel != null) {
