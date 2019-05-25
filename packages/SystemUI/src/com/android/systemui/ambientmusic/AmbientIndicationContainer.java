@@ -14,8 +14,6 @@ import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import stag.support.lottie.LottieAnimationView;
-
 import com.android.systemui.AutoReinflateContainer;
 import com.android.systemui.R;
 import com.android.systemui.doze.DozeLog;
@@ -29,7 +27,7 @@ import java.util.concurrent.TimeUnit;
 
 public class AmbientIndicationContainer extends AutoReinflateContainer {
     private View mAmbientIndication;
-    private LottieAnimationView mIcon;
+    private ImageView mIcon;
     private CharSequence mIndication;
     private StatusBar mStatusBar;
     private TextView mText;
@@ -63,8 +61,8 @@ public class AmbientIndicationContainer extends AutoReinflateContainer {
     public void updateAmbientIndicationView(View view) {
         mAmbientIndication = findViewById(R.id.ambient_indication);
         mText = (TextView)findViewById(R.id.ambient_indication_text);
-        mIcon = (LottieAnimationView)findViewById(R.id.ambient_indication_icon);
         setIndication(mMediaText, false);
+        mIcon = (ImageView)findViewById(R.id.ambient_indication_icon);
     }
 
     public void updateKeyguardState(boolean keyguard) {
@@ -176,8 +174,6 @@ public class AmbientIndicationContainer extends AutoReinflateContainer {
             }
         }
         mText.setText(mInfoToSet);
-        mIcon.setAnimation(R.raw.ambient_music_note);
-        mIcon.playAnimation();
         mAmbientIndication.setVisibility(shouldShow() ? View.VISIBLE : View.INVISIBLE);
     }
 
