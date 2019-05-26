@@ -1,3 +1,20 @@
+/*
+**
+** Copyright 2019, Pearl Project
+** Copyright 2019, StagOS
+**
+** Licensed under the Apache License, Version 2.0 (the "License");
+** you may not use this file except in compliance with the License.
+** You may obtain a copy of the License at
+**
+**     http://www.apache.org/licenses/LICENSE-2.0
+**
+** Unless required by applicable law or agreed to in writing, software
+** distributed under the License is distributed on an "AS IS" BASIS,
+** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+** See the License for the specific language governing permissions and
+** limitations under the License.
+*/
 package com.android.keyguard.clocks;
 
 import android.content.BroadcastReceiver;
@@ -5,7 +22,6 @@ import android.content.Context;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.text.format.DateUtils;
@@ -22,13 +38,10 @@ import com.android.systemui.R;
 
 public class CustomTextClock extends TextView {
 
-    final Resources res = getResources();
-
-    private final String[] TensString = res.getStringArray(R.array.TensString);
-    private final String[] UnitsString = res.getStringArray(R.array.UnitsString);
-    private final String[] TensStringH = res.getStringArray(R.array.TensStringH);
-    private final String[] UnitsStringH = res.getStringArray(R.array.UnitsStringH);
-
+    private final String[] TensString = {"", "", "Twenty","Thirty","Forty", "Fifty", "Sixty"};
+    private final String[] UnitsString = {"Clock", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen" };
+    private final String[] TensStringH = {"", "", "Twenty","Thirty","Forty", "Fifty", "Sixty"};
+    private final String[] UnitsStringH = {"Twelve", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen" };
     private Time mCalendar;
 
     private boolean mAttached;
@@ -119,14 +132,14 @@ public class CustomTextClock extends TextView {
         switch(handType){
             case 0:
                 if (hour == 12 && minute == 0) {
-                setText(res.getString(R.string.text_clock_high));
+                setText("High");
                 } else {
                 setText(getIntStringHour(hour));
                 }
                 break;
             case 1:
                 if (hour == 12 && minute == 0) {
-                setText(res.getString(R.string.text_clock_noon));
+                setText("Noon");
                 } else {
                 setText(getIntStringMin(minute));
                 }
@@ -134,7 +147,6 @@ public class CustomTextClock extends TextView {
             default:
                 break;
         }
-
 
         updateContentDescription(mCalendar, getContext());
     }
@@ -187,11 +199,10 @@ public class CustomTextClock extends TextView {
             if ( units == 0 ) {
                 NumString = TensString[tens];
             } else {
-                NumString = TensString[tens] + " " + UnitsString[units];
+	   NumString = TensString[tens]+" "+UnitsString[units];
             }
         } else if (num < 10 ) {
-            NumString = res.getString(R.string.text_clock_zero_h_min) +
-                    " " + UnitsString[num];
+            NumString = "O\'"+UnitsString[num];
         } else if (num >= 10 && num < 20) {
             NumString = UnitsString[num];
         }
