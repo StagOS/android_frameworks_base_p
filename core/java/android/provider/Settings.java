@@ -4346,12 +4346,6 @@ public final class Settings {
         public static final String LOCKSCREEN_BATTERY_INFO = "lockscreen_battery_info";
 
         /**
-         * Whether to enable the pixel navbar animation
-         * @hide
-         */
-        public static final String PIXEL_NAV_ANIMATION = "pixel_nav_animation";
-
-        /**
          * Weather lockscreen temperature scale
          * @hide
          */
