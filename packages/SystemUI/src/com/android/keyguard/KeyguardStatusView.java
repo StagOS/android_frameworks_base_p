@@ -449,7 +449,17 @@ public class KeyguardStatusView extends GridLayout implements
         } else if (mClockSelection == 11) {
             mClockView.setFormat12Hour(Html.fromHtml("<strong>h</strong><font color=" + AccentUtils.getAccentColor(getResources().getColor(R.color.sammy_minutes_accent)) + ">mm</font>"));
             mClockView.setFormat24Hour(Html.fromHtml("<strong>kk</strong><font color=" + AccentUtils.getAccentColor(getResources().getColor(R.color.sammy_minutes_accent)) + ">mm</font>"));
-        } else if (mClockSelection == 15) {
+        } else if (mClockSelection == 2) {
+            mCustomClockView.onTimeChanged();
+        } else if (mClockSelection == 7) {
+            mSpideyClockView.onTimeChanged();
+        } else if (mClockSelection == 8) {
+            mCustomNumClockView.onTimeChanged();
+        } else if (mClockSelection == 12) {
+            mSpectrumClockView.onTimeChanged();
+        } else if (mClockSelection == 13) {
+            mSneekyClockView.onTimeChanged();
+	} else if (mClockSelection == 14) {
             mTextClock.onTimeChanged();
       	} else {
             mClockView.setFormat12Hour("hh\nmm");
@@ -1566,7 +1576,7 @@ public class KeyguardStatusView extends GridLayout implements
 		mCustomNumClockView.setDark(dark);
         mSpectrumClockView.setDark(dark);
         mSneekyClockView.setDark(dark);
-        if (mClockSelection == 15) {
+        if (mClockSelection == 14) {
             mTextClock.setTextColor(blendedTextColor);
         }
         updateVisibilities();
