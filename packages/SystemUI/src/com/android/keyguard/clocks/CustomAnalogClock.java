@@ -20,6 +20,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.AccentUtils;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -32,6 +33,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.RemoteViews.RemoteView;
 
+import com.android.settingslib.Utils;
 import com.android.systemui.R;
 
 import java.util.TimeZone;
@@ -227,8 +229,8 @@ public class CustomAnalogClock extends View {
         if (mIsAmbientDisplay) {
             hourHand.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_ATOP);
         } else {
-            hourHand.setColorFilter(getResources().getColor(
-                    R.color.analog_clock_hand_hour_color), PorterDuff.Mode.SRC_ATOP);
+            hourHand.setColorFilter(AccentUtils.getAccentColor(getResources()
+		.getColor(R.color.analog_clock_hand_hour_color)), PorterDuff.Mode.SRC_ATOP);
         }
         hourHand.draw(canvas);
         canvas.restore();
@@ -245,8 +247,8 @@ public class CustomAnalogClock extends View {
         if (mIsAmbientDisplay) {
             minuteHand.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
         } else {
-            minuteHand.setColorFilter(getResources().getColor(
-                    R.color.analog_clock_hand_minute_color), PorterDuff.Mode.SRC_ATOP);
+            minuteHand.setColorFilter(AccentUtils.getAccentColor(getResources()
+		.getColor(R.color.analog_clock_hand_minute_color)), PorterDuff.Mode.SRC_ATOP);
         }
         minuteHand.draw(canvas);
         canvas.restore();
