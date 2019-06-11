@@ -52,6 +52,7 @@ import com.android.systemui.qs.tiles.SoundSearchTile;
 import com.android.systemui.qs.tiles.ScreenshotTile;
 import com.android.systemui.qs.tiles.SmartPixelsTile;
 import com.android.systemui.qs.tiles.ThemeTile;
+import com.android.systemui.qs.tiles.UsbTetherTile;
 import com.android.systemui.qs.tiles.UserTile;
 import com.android.systemui.qs.tiles.WifiTile;
 import com.android.systemui.qs.tiles.WorkModeTile;
@@ -144,6 +145,8 @@ public class QSFactoryImpl implements QSFactory {
                 return new AODTile(mHost);
             case "ambient_display":
                 return new AmbientDisplayTile(mHost);
+            case "usb_tether":
+                return new UsbTetherTile(mHost);
         }
 
         // Intent tiles.
