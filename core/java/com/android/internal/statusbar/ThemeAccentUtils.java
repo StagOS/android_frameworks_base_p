@@ -131,6 +131,12 @@ public class ThemeAccentUtils {
         "com.android.systemui.qstile.dottedcircle", // 12
         "com.android.systemui.qstile.shishuink", // 13
         "com.android.systemui.qstile.attemptmountain", // 14
+        "com.android.systemui.qstile.cookie", // 15
+        "com.android.systemui.qstile.neonlike", // 16
+        "com.android.systemui.qstile.oos", // 17
+        "com.android.systemui.qstile.triangles", // 18
+        "com.android.systemui.qstile.divided", // 19
+        "com.android.systemui.qstile.cosmos" // 20
     };
 
     private static final String STOCK_DARK_THEME = "com.android.systemui.theme.dark";
