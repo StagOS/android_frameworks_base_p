@@ -5477,6 +5477,14 @@ public final class Settings {
          */
         public static final String POWER_MENU_ANIMATIONS = "power_menu_animations";
 
+
+        /**
+         * Gaming Mode master switch
+         *
+         * @hide
+         */
+        public static final String GAMING_MODE_MASTER_SWITCH = "gaming_mode_master_switch";
+
         /**
          * Whether to enable gaming mode or not
          *
