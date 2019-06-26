@@ -159,6 +159,7 @@ oneway interface IStatusBar
     void toggleCameraFlash();
     void toggleCameraFlashOn();
     void toggleCameraFlashOff();
+    void toggleCameraFlashState(boolean enable);
 
     // Start SmartNav API
     void screenPinningStateChanged(boolean enabled);
@@ -167,3 +168,4 @@ oneway interface IStatusBar
     void toggleNavigationEditor();
     void dispatchNavigationEditorResults(in Intent intent);
 }
+

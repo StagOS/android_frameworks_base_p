@@ -109,6 +109,7 @@ interface IStatusBarService
     void toggleCameraFlash();
     void toggleCameraFlashOn();
     void toggleCameraFlashOff();
+    void toggleCameraFlashState(boolean enable);
     void restartUI();
 
     // Start SmartNav methods
