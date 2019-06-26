@@ -5899,6 +5899,12 @@ public final class Settings {
          */
         public static final String QS_EDIT_TOGGLE = "qs_edit_toggle";
 
+
+	/**
+         * @hide
+         */
+        public static final String SMART_CHARGING_RESET_STATS = "smart_charging_reset_stats";
+
         /**
          * Show Edit icon in QS Footer.
          *
