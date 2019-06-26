@@ -1,4 +1,4 @@
-/*
+ /*
  * Copyright (C) 2006 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -5525,6 +5525,12 @@ public final class Settings {
          * @hide
          */
         public static final String LOCKCLOCK_FONT_SIZE = "lockclock_font_size";
+
+        /**
+         * Select which lockscreen date style to display
+         * @hide
+         */
+        public static final String LOCKSCREEN_DATE_SELECTION = "lockscreen_date_selection";
 
         /**
          * Change the color of the lockscreen clock
