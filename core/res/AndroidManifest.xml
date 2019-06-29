@@ -609,6 +609,10 @@
     <protected-broadcast android:name="com.android.systemui.action.RESTART_THEME" />
     <protected-broadcast android:name="com.android.systemui.action.REFRESH_SOUND" />
 
+    <!-- Gaming mode -->
+    <protected-broadcast android:name="android.intent.action.GAMING_MODE_TURN_OFF" />
+    <protected-broadcast android:name="android.intent.action.GAMING_MODE_TURN_ON" />
+
     <!-- ====================================================================== -->
     <!--                          RUNTIME PERMISSIONS                           -->
     <!-- ====================================================================== -->
