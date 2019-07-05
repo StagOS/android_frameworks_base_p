@@ -540,6 +540,7 @@ public class StatusBar extends SystemUI implements DemoMode,
     private final DisplayMetrics mDisplayMetrics = new DisplayMetrics();
 
     private PackageMonitor mPackageMonitor;
+    private boolean mHeadsUpDisabled, mGamingModeActivated;
 
     // XXX: gesture research
     private final GestureRecorder mGestureRec = DEBUG_GESTURES
@@ -5602,6 +5603,12 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.DOUBLE_TAP_SLEEP_GESTURE),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.GAMING_MODE_ACTIVE),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.GAMING_MODE_HEADSUP_TOGGLE),
+                    false, this, UserHandle.USER_ALL);
 	    }
 
         @Override
@@ -5677,6 +5684,10 @@ public class StatusBar extends SystemUI implements DemoMode,
             } else if (uri.equals(Settings.System.getUriFor(
                     Settings.System.DOUBLE_TAP_SLEEP_GESTURE))) {
                 setLockscreenDoubleTapToSleep();
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.GAMING_MODE_ACTIVE)) ||
+                    uri.equals(Settings.System.getUriFor(Settings.System.GAMING_MODE_HEADSUP_TOGGLE))) {
+                updateGamingPeekMode();
             }
 
         }
@@ -5701,6 +5712,7 @@ public class StatusBar extends SystemUI implements DemoMode,
             handleCutout(null);
             updateTickerAnimation();
             updateTickerTickDuration();
+            updateGamingPeekMode();
    }
 
 }
@@ -5709,6 +5721,14 @@ public class StatusBar extends SystemUI implements DemoMode,
         final String stopString = Settings.System.getString(mContext.getContentResolver(),
                     Settings.System.HEADS_UP_STOPLIST_VALUES);
         splitAndAddToArrayList(mStoplist, stopString, "\\|");
+    }
+
+    private void updateGamingPeekMode() {
+        mGamingModeActivated = Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.GAMING_MODE_ACTIVE, 1) == 1;
+        mHeadsUpDisabled = Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.GAMING_MODE_HEADSUP_TOGGLE, 1) == 1;
+        mEntryManager.setGamingPeekMode(mGamingModeActivated && mHeadsUpDisabled);
     }
 
      private void setHeadsUpBlacklist() {
