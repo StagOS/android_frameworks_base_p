@@ -226,8 +226,6 @@ Navigator.OnVerticalChangedListener, KeyguardMonitor.Callback, NotificationMedia
                 backButton.setVisibility(alpha > 0 ? View.VISIBLE : View.INVISIBLE);
                 backButton.setAlpha(alpha, animate);
             }
-            backButton.setVisibility(alpha > 0 ? View.VISIBLE : View.INVISIBLE);
-            backButton.setAlpha(alpha, animate);
         }
     };
 
