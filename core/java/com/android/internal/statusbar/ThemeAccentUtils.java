@@ -104,8 +104,9 @@ public class ThemeAccentUtils {
     private static final String[] SHISHUNIGHTS_THEMES = {
         "com.android.system.theme.shishunights", // 0
         "com.android.settings.theme.shishunights", // 1
-        "com.android.settings.intelligence.theme.shishunights", // 2
-        "com.android.gboard.theme.shishunights", // 3
+        "com.android.systemui.theme.shishunights", // 2
+        "com.android.settings.intelligence.theme.shishunights", // 3
+        "com.android.gboard.theme.shishunights", // 4
     };
 
     // Switch themes
