@@ -256,11 +256,7 @@ public class ThemeTile extends QSTileImpl<BooleanState> {
 
         @Override
         public CharSequence getTitle() {
-            if (mMode == Mode.ACCENT) {
-                return mContext.getString(R.string.quick_settings_theme_tile_accent_detail_title);
-            } else {
                 return mContext.getString(R.string.quick_settings_theme_tile_style_detail_title);
-            }
         }
 
         @Override
@@ -284,11 +280,7 @@ public class ThemeTile extends QSTileImpl<BooleanState> {
             if (mAdapter == null)
                 return;
             mThemeItems.clear();
-            if (mMode == Mode.ACCENT) {
-                mThemeItems.addAll(getAccentItems());
-            } else {
                 mThemeItems.addAll(getStyleItems());
-            }
             mAdapter.notifyDataSetChanged();
         }
 
@@ -392,14 +384,13 @@ public class ThemeTile extends QSTileImpl<BooleanState> {
 
     @Override
     protected void handleLongClick() {
-        mMode = mMode == Mode.ACCENT ? Mode.STYLE : Mode.ACCENT;
+        mMode = Mode.STYLE;
         refreshState();
     }
 
     @Override
     protected void handleUpdateState(BooleanState state, Object arg) {
-        state.label = mContext.getString(mMode == Mode.ACCENT
-                ? R.string.quick_settings_theme_tile_title : R.string.system_theme_style_title);
+        state.label = mContext.getString(R.string.system_theme_style_title);
         state.icon = ResourceIcon.get(R.drawable.ic_qs_accent);
     }
 
