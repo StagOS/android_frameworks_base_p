@@ -408,7 +408,7 @@ public abstract class QSTileImpl<TState extends State> implements QSTile {
 
         boolean enableQsTileTinting = context.getResources().getBoolean(R.bool.config_enable_qs_tile_tinting);
 
-        int activeDefault = Utils.getColorAttr(context, android.R.attr.colorPrimary);
+/*        int activeDefault = Utils.getColorAttr(context, android.R.attr.colorPrimary);
 
         boolean setQsFromWall = Settings.System.getIntForUser(context.getContentResolver(),
                     Settings.System.QS_PANEL_BG_USE_WALL, 0, UserHandle.USER_CURRENT) == 1;
@@ -419,9 +419,10 @@ public abstract class QSTileImpl<TState extends State> implements QSTile {
 
         int qsBackGroundColor = Settings.System.getIntForUser(context.getContentResolver(),
                 Settings.System.QS_PANEL_BG_COLOR, activeDefault, UserHandle.USER_CURRENT);
+
         int qsBackGroundColorWall = Settings.System.getIntForUser(context.getContentResolver(),
                 Settings.System.QS_PANEL_BG_COLOR_WALL, activeDefault, UserHandle.USER_CURRENT);
-
+*/
         switch (state) {
             case Tile.STATE_UNAVAILABLE:
                 if (!enableQsTileTinting) {
@@ -439,6 +440,7 @@ public abstract class QSTileImpl<TState extends State> implements QSTile {
                 }
             case Tile.STATE_ACTIVE:
                 if (!enableQsTileTinting) {
+/*
                     if (setQsFromResources) {
                         return Utils.getColorAttr(context, android.R.attr.colorPrimary);
                     } else {
@@ -451,6 +453,8 @@ public abstract class QSTileImpl<TState extends State> implements QSTile {
                                 return qsBackGroundColor;
                         }
                     }
+*/
+                    return Utils.getColorAttr(context, android.R.attr.colorPrimary);
                 } else {
                     return context.getColor(R.color.qs_tiles_active_tint);
                 }

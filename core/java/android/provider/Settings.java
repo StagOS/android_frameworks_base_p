@@ -5480,51 +5480,6 @@ public final class Settings {
         public static final String AMBIENT_BATTERY_PERCENT = "ambient_battery_percent";
 
         /**
-         * Whether to change the color of the qs panel
-         * @hide
-         */
-        public static final String QS_PANEL_BG_COLOR = "qs_panel_bg_color";
-
-        /** @hide */
-        private static final Validator QS_PANEL_BG_COLOR_VALIDATOR = ANY_INTEGER_VALIDATOR;
-
-        /**
-         * Color of the qs panel evaluated from wallpaper
-         * @hide
-         */
-        public static final String QS_PANEL_BG_COLOR_WALL = "qs_panel_bg_color_wall";
-
-        /** @hide */
-        private static final Validator QS_PANEL_BG_COLOR_WALL_VALIDATOR = ANY_INTEGER_VALIDATOR;
-
-        /**
-         * Whether to change the color of the qs panel based on wallpaper
-         * @hide
-         */
-        public static final String QS_PANEL_BG_USE_WALL = "qs_panel_bg_use_wall";
-
-        /** @hide */
-        private static final Validator QS_PANEL_BG_USE_WALL_VALIDATOR = BOOLEAN_VALIDATOR;
-
-        /**
-         * Whether to use framework styles and resources on qs panel
-         * @hide
-         */
-        public static final String QS_PANEL_BG_USE_FW = "qs_panel_bg_use_fw";
-
-        /** @hide */
-        private static final Validator QS_PANEL_BG_USE_FW_VALIDATOR = BOOLEAN_VALIDATOR;
-
-        /**
-         * Whether to use framework styles and resources on qs panel
-         * @hide
-         */
-        public static final String QS_PANEL_BG_USE_ACCENT = "qs_panel_bg_use_accent";
-
-        /** @hide */
-        private static final Validator QS_PANEL_BG_USE_ACCENT_VALIDATOR = BOOLEAN_VALIDATOR;
-
-        /**
          * Whether to use the custom status bar header or not
          * @hide
          */
@@ -6042,11 +5997,6 @@ public final class Settings {
             STATUSBAR_CLOCK_DATE_STYLE,
             STATUSBAR_CLOCK_DATE_FORMAT,
             VOLUME_KEYS_CONTROL_RING_TONE,
-            QS_PANEL_BG_COLOR,
-            QS_PANEL_BG_COLOR_WALL,
-            QS_PANEL_BG_USE_WALL,
-            QS_PANEL_BG_USE_FW,
-            QS_PANEL_BG_USE_ACCENT,
             NOTIFICATION_LIGHT_PULSE,
             STATUS_BAR_CUSTOM_HEADER,
             STATUS_BAR_CUSTOM_HEADER_SHADOW,
@@ -6202,11 +6152,6 @@ public final class Settings {
             PRIVATE_SETTINGS.add(STATUS_BAR_BRIGHTNESS_CONTROL);
             PRIVATE_SETTINGS.add(WEATHER_LOCKSCREEN_UNIT);
             PRIVATE_SETTINGS.add(VOLUME_KEYS_CONTROL_RING_TONE);
-            PRIVATE_SETTINGS.add(QS_PANEL_BG_COLOR);
-            PRIVATE_SETTINGS.add(QS_PANEL_BG_COLOR_WALL);
-            PRIVATE_SETTINGS.add(QS_PANEL_BG_USE_WALL);
-            PRIVATE_SETTINGS.add(QS_PANEL_BG_USE_FW);
-            PRIVATE_SETTINGS.add(QS_PANEL_BG_USE_ACCENT);
             PRIVATE_SETTINGS.add(STATUS_BAR_CUSTOM_HEADER);
             PRIVATE_SETTINGS.add(STATUS_BAR_CUSTOM_HEADER_SHADOW);
             PRIVATE_SETTINGS.add(STATUS_BAR_DAYLIGHT_HEADER_PACK);
@@ -6348,11 +6293,6 @@ public final class Settings {
             VALIDATORS.put(STATUSBAR_CLOCK_DATE_FORMAT, STATUSBAR_CLOCK_DATE_FORMAT_VALIDATOR);
             VALIDATORS.put(WEATHER_LOCKSCREEN_UNIT, WEATHER_LOCKSCREEN_UNIT_VALIDATOR);
             VALIDATORS.put(VOLUME_KEYS_CONTROL_RING_TONE,VOLUME_KEYS_CONTROL_RING_TONE_VALIDATOR);
-            VALIDATORS.put(QS_PANEL_BG_COLOR, QS_PANEL_BG_COLOR_VALIDATOR);
-            VALIDATORS.put(QS_PANEL_BG_COLOR_WALL, QS_PANEL_BG_COLOR_WALL_VALIDATOR);
-            VALIDATORS.put(QS_PANEL_BG_USE_WALL, QS_PANEL_BG_USE_WALL_VALIDATOR);
-            VALIDATORS.put(QS_PANEL_BG_USE_FW, QS_PANEL_BG_USE_FW_VALIDATOR);
-            VALIDATORS.put(QS_PANEL_BG_USE_ACCENT, QS_PANEL_BG_USE_ACCENT_VALIDATOR);
             VALIDATORS.put(NOTIFICATION_LIGHT_PULSE, BOOLEAN_VALIDATOR);
             VALIDATORS.put(STATUS_BAR_CUSTOM_HEADER,
                     STATUS_BAR_CUSTOM_HEADER_VALIDATOR);
