@@ -6193,7 +6193,7 @@ public class StatusBar extends SystemUI implements DemoMode,
         @Override
         public void onDoubleTap(float screenX, float screenY) {
             if (isDoubleTapOnMusicTicker(screenX, screenY)) {
-                handleSystemKey(KeyEvent.KEYCODE_MEDIA_PAUSE);
+                handleSystemKey(KeyEvent.KEYCODE_MEDIA_NEXT);
             } else {
                 for (Callback callback : mCallbacks) {
                     callback.wakeUpFromDoubleTapAod();

@@ -345,7 +345,7 @@ public class NotificationMediaManager implements Dumpable {
         mMediaController = null;
     }
 
-    public void onPlayPauseTrackEvent(int key, final Handler h) {
+    public void onSkipTrackEvent(int key, final Handler h) {
         if (mMediaSessionManager != null) {
             final List<MediaController> sessions
                     = mMediaSessionManager.getActiveSessionsForUser(
@@ -448,21 +448,6 @@ public class NotificationMediaManager implements Dumpable {
                 controller.dispatchMediaButtonEvent(evUp);
             }
         }, 20);
-    }
-
-    public void onSkipTrackEvent(int key, final Handler h) {
-        if (mMediaSessionManager != null) {
-            final List<MediaController> sessions
-                    = mMediaSessionManager.getActiveSessionsForUser(
-                    null, UserHandle.USER_ALL);
-            for (MediaController aController : sessions) {
-                if (PlaybackState.STATE_PLAYING ==
-                        getMediaControllerPlaybackState(aController)) {
-                    triggerKeyEvents(key, aController, h);
-                    break;
-                }
-            }
-        }
     }
 
 }

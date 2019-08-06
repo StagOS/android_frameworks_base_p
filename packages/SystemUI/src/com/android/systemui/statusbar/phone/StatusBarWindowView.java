@@ -128,7 +128,7 @@ public class StatusBarWindowView extends FrameLayout implements Tunable {
         mFalsingManager = FalsingManager.getInstance(context);
         mDoubleTapHelper = new DoubleTapHelper(this, active -> {}, () -> {
             if (mIsMusicTickerTap) {
-                mService.handleSystemKey(KeyEvent.KEYCODE_MEDIA_PAUSE);
+                mService.handleSystemKey(KeyEvent.KEYCODE_MEDIA_NEXT);
                 return true;
             }
             mService.wakeUpIfDozing(SystemClock.uptimeMillis(), this);
