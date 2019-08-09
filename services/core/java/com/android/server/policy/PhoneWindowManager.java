@@ -331,6 +331,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.Constructor;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -680,7 +681,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
     boolean mAllowStartActivityForLongPressOnPowerDuringSetup;
     MetricsLogger mLogger;
     private DeviceKeyHandler mDeviceKeyHandler;
-    private AltDeviceKeyHandler mAltDeviceKeyHandler;
+//  private AltDeviceKeyHandler mAltDeviceKeyHandler;
     private HardkeyActionHandler mKeyHandler;
 
     private boolean mHandleVolumeKeysInWM;
@@ -934,6 +935,8 @@ public class PhoneWindowManager implements WindowManagerPolicy {
     private Sensor mProximitySensor;
     private SensorEventListener mProximityListener;
     private android.os.PowerManager.WakeLock mProximityWakeLock;
+
+    private final List<AltDeviceKeyHandler> mAltDeviceKeyHandlers = new ArrayList<>();
 
     private static final int MSG_ENABLE_POINTER_LOCATION = 1;
     private static final int MSG_DISABLE_POINTER_LOCATION = 2;
@@ -2958,27 +2961,27 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         }
 
 // AltDeviceKeyHandler
-        String AltdeviceKeyHandlerLib = mContext.getResources().getString(
-                com.android.internal.R.string.config_deviceKeyHandlerLib);
+        final Resources res = mContext.getResources();
+        final String[] AltdeviceKeyHandlerLibs = res.getStringArray(
+                com.android.internal.R.array.config_deviceKeyHandlerLibs);
+        final String[] AltdeviceKeyHandlerClasses = res.getStringArray(
+                com.android.internal.R.array.config_deviceKeyHandlerClasses);
 
-        String AltdeviceKeyHandlerClass = mContext.getResources().getString(
-                com.android.internal.R.string.config_deviceKeyHandlerClass);
-
-        if (!deviceKeyHandlerLib.isEmpty() && !deviceKeyHandlerClass.isEmpty()) {
-            PathClassLoader loader =  new PathClassLoader(deviceKeyHandlerLib,
-                    getClass().getClassLoader());
+        for (int i = 0;
+		i < AltdeviceKeyHandlerLibs.length && i < AltdeviceKeyHandlerClasses.length; i++) {
             try {
-                Class<?> klass = loader.loadClass(deviceKeyHandlerClass);
+                PathClassLoader loader = new PathClassLoader(
+                        AltdeviceKeyHandlerLibs[i], getClass().getClassLoader());
+                Class<?> klass = loader.loadClass(AltdeviceKeyHandlerClasses[i]);
                 Constructor<?> constructor = klass.getConstructor(Context.class);
-                mAltDeviceKeyHandler = (AltDeviceKeyHandler) constructor.newInstance(
-                        mContext);
-                if(DEBUG) Slog.d(TAG, "Device key handler loaded");
+                mAltDeviceKeyHandlers.add((AltDeviceKeyHandler) constructor.newInstance(mContext));
             } catch (Exception e) {
                 Slog.w(TAG, "Could not instantiate device key handler "
-                        + deviceKeyHandlerClass + " from class "
-                        + deviceKeyHandlerLib, e);
+                        + AltdeviceKeyHandlerLibs[i] + " from class "
+                        + AltdeviceKeyHandlerClasses[i], e);
             }
         }
+        if (DEBUG) Slog.d(TAG, "" + mAltDeviceKeyHandlers.size() + " device key handlers loaded");
     }
 
 
@@ -5045,16 +5048,8 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         }
 
         // Specific device key handling(Alt)
-        if (mAltDeviceKeyHandler != null) {
-            try {
-                // The device only should consume known keys.
-                event = mAltDeviceKeyHandler.handleKeyEvent(event);
-                if (event == null) {
-                    return -1;
-                }
-            } catch (Exception e) {
-                Slog.w(TAG, "Could not dispatch event to device key handler", e);
-            }
+        if (dispatchKeyToKeyHandlers(event)) {
+            return -1;
         }
 
 
@@ -5161,6 +5156,23 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                 Slog.e(TAG, "Error taking bugreport", e);
             }
         }
+    }
+
+    private boolean dispatchKeyToKeyHandlers(KeyEvent event) {
+        for (AltDeviceKeyHandler handler : mAltDeviceKeyHandlers) {
+            try {
+                if (DEBUG_INPUT) {
+                    Log.d(TAG, "Dispatching key event " + event + " to handler " + handler);
+                }
+                event = handler.handleKeyEvent(event);
+                if (event == null) {
+                    return true;
+                }
+            } catch (Exception e) {
+                Slog.w(TAG, "Could not dispatch event to device key handler", e);
+            }
+        }
+        return false;
     }
 
     /** {@inheritDoc} */
@@ -7338,18 +7350,9 @@ public class PhoneWindowManager implements WindowManagerPolicy {
             }
         }
 
-        // Specific device key handling
-        if (mAltDeviceKeyHandler != null) {
-            try {
-                // The device only should consume known keys.
-                event = mAltDeviceKeyHandler.handleKeyEvent(event);
-                if (event == null) {
-
-                    return 0;
-                }
-            } catch (Exception e) {
-                Slog.w(TAG, "Could not dispatch event to device key handler", e);
-            }
+        // Specific device key handling(Alt)
+        if (dispatchKeyToKeyHandlers(event)) {
+            return 0;
         }
 
 
