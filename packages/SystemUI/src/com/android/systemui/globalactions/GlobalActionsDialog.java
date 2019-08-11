@@ -786,8 +786,15 @@ class GlobalActionsDialog implements DialogInterface.OnDismissListener,
             mHandler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    StagUtils.takeScreenshot(true);
+                    try {
+                        WindowManagerGlobal.getWindowManagerService().takeOPScreenshot(1, 0);
+                    } catch (RemoteException e) {
+                        Log.e(TAG, "Error while trying to takeOPScreenshot.", e);
                 }
+                    MetricsLogger.action(mContext,
+                            MetricsEvent.ACTION_SCREENSHOT_POWER_MENU);
+                }
+
             }, 500);
         }
 

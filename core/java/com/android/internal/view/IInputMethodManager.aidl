@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 The Android Open Source Project
+ * Long screenshotCopyright (C) 2008 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -93,4 +93,7 @@ interface IInputMethodManager {
     void reportFullscreenMode(in IBinder token, boolean fullscreen);
 
     oneway void notifyUserAction(int sequenceNumber);
+
+    // Long screenshot
+    boolean hideSoftInputForLongshot(int flags, in ResultReceiver resultReceiver);
 }
