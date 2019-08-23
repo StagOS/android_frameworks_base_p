@@ -5523,9 +5523,6 @@ public class StatusBar extends SystemUI implements DemoMode,
                     Settings.System.DOUBLE_TAP_SLEEP_LOCKSCREEN),
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.DOUBLE_TAP_SLEEP_GESTURE),
-                    false, this, UserHandle.USER_ALL);
-            resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.ACCENT_PICKER),
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
@@ -5602,6 +5599,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.STATUS_BAR_TICKER_TICK_DURATION),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.DOUBLE_TAP_SLEEP_GESTURE),
+                    false, this, UserHandle.USER_ALL);
 	    }
 
         @Override
@@ -5671,7 +5671,14 @@ public class StatusBar extends SystemUI implements DemoMode,
             } else if (uri.equals(Settings.System.getUriFor(
                 Settings.System.STATUS_BAR_TICKER_TICK_DURATION))) {
                 updateTickerTickDuration();
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.DOUBLE_TAP_SLEEP_LOCKSCREEN))) {
+                setLockscreenDoubleTapToSleep();
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.DOUBLE_TAP_SLEEP_GESTURE))) {
+                setLockscreenDoubleTapToSleep();
             }
+
         }
         public void update() {
             setHeadsUpStoplist();
@@ -5679,7 +5686,6 @@ public class StatusBar extends SystemUI implements DemoMode,
             setQsPanelOptions();
             setLockscreenMediaMetadata();
             setLockscreenDoubleTapToSleep();
-            setStatusDoubleTapToSleep();
 	    setPulseBlacklist();
             setBrightnessSlider();
 	    updateTheme();
@@ -5775,12 +5781,6 @@ public class StatusBar extends SystemUI implements DemoMode,
     private void setLockscreenDoubleTapToSleep() {
         if (mStatusBarWindow != null) {
             mStatusBarWindow.setLockscreenDoubleTapToSleep();
-        }
-    }
-
-    private void setStatusDoubleTapToSleep() {
-        if (mStatusBarWindow != null) {
-            mStatusBarWindow.setStatusDoubleTapToSleep();
         }
     }
 
