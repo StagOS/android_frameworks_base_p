@@ -39,7 +39,6 @@ public class NotificationChannels extends SystemUI {
     public static String BATTERY     = "BAT";
     public static String HINTS       = "HNT";
     public static String SCREENRECORDS = "SCR";
-    public static String GAMING = "GAM";
 
     public static void createAll(Context context) {
         final NotificationManager nm = context.getSystemService(NotificationManager.class);
@@ -75,12 +74,6 @@ public class NotificationChannels extends SystemUI {
                 HINTS,
                 context.getString(R.string.notification_channel_hints),
                 NotificationManager.IMPORTANCE_DEFAULT);
-
-        final NotificationChannel gaming = new NotificationChannel(
-                GAMING,
-                context.getString(R.string.notification_channel_gaming),
-                NotificationManager.IMPORTANCE_LOW);
-
         // No need to bypass DND.
 
         nm.createNotificationChannels(Arrays.asList(
@@ -96,8 +89,6 @@ public class NotificationChannels extends SystemUI {
                         SCREENRECORDS,
                         context.getString(R.string.notification_channel_screenrecord),
                         NotificationManager.IMPORTANCE_LOW)));
-                gaming
-        ));
 
         // Delete older SS channel if present.
         // Screenshots promoted to heads-up in P, this cleans up the lower priority channel from O.
