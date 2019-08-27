@@ -128,8 +128,6 @@ public class QSFactoryImpl implements QSFactory {
                 return new ThemeTile(mHost);
             case "heads_up":
                 return new HeadsUpTile(mHost);
-            case "gaming":
-                return new GamingModeTile(mHost);
             case "expanded_desktop":
                 return new ExpandedDesktopTile(mHost);
             case "caffeine":
