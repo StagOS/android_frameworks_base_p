@@ -5911,15 +5911,6 @@ public final class Settings {
 
 
         /**
-         * @hide
-         */
-        public static final String OMNI_CUSTOM_FP_ICON = "custom_fingerprint_icon";
-
-        /** @hide */
-        private static final Validator OMNI_CUSTOM_FP_ICON_VALIDATOR =
-                ANY_STRING_VALIDATOR;
-
-        /**
          * Whether to enable the pixel navbar animation
          * @hide
          */
@@ -6105,7 +6096,6 @@ public final class Settings {
             DISPLAY_CUTOUT_MODE,
             STOCK_STATUSBAR_IN_HIDE,
             DOZE_ON_CHARGE,
-            OMNI_CUSTOM_FP_ICON,
             THEMING_SETTINGS_DASHBOARD_ICONS,
             STATUS_BAR_SHOW_TICKER,
             STATUS_BAR_TICKER_ANIMATION_MODE,
@@ -6274,7 +6264,6 @@ public final class Settings {
             PRIVATE_SETTINGS.add(DISPLAY_PICTURE_ADJUSTMENT);
             PRIVATE_SETTINGS.add(LIVE_DISPLAY_HINTED);
             PRIVATE_SETTINGS.add(DOZE_ON_CHARGE);
-            PRIVATE_SETTINGS.add(OMNI_CUSTOM_FP_ICON);
             PRIVATE_SETTINGS.add(THEMING_SETTINGS_DASHBOARD_ICONS);
             // Pocket mode handler.
             PRIVATE_SETTINGS.add(POCKET_JUDGE);
@@ -6426,7 +6415,6 @@ public final class Settings {
             VALIDATORS.put(DISPLAY_PICTURE_ADJUSTMENT, DISPLAY_PICTURE_ADJUSTMENT_VALIDATOR);
             VALIDATORS.put(LIVE_DISPLAY_HINTED, LIVE_DISPLAY_HINTED_VALIDATOR);
             VALIDATORS.put(DOZE_ON_CHARGE, DOZE_ON_CHARGE_VALIDATOR);
-            VALIDATORS.put(OMNI_CUSTOM_FP_ICON, OMNI_CUSTOM_FP_ICON_VALIDATOR);
             VALIDATORS.put(THEMING_SETTINGS_DASHBOARD_ICONS, THEMING_SETTINGS_DASHBOARD_ICONS_VALIDATOR);
             VALIDATORS.put(STATUS_BAR_SHOW_TICKER, STATUS_BAR_SHOW_TICKER_VALIDATOR);
             VALIDATORS.put(STATUS_BAR_TICKER_ANIMATION_MODE,

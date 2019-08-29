@@ -17,21 +17,15 @@
 package com.android.systemui.fingerprint;
 
 import android.app.KeyguardManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.content.Context;
 import android.hardware.display.DisplayManager;
-import android.net.Uri;
-import android.os.ParcelFileDescriptor;
 import android.os.PowerManager;
 import android.os.RemoteException;
 import android.os.ServiceManager;
-import android.os.UserHandle;
-import android.provider.Settings;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.View.OnTouchListener;
@@ -39,7 +33,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.view.MotionEvent;
 import android.view.WindowManager;
-import android.text.TextUtils;
 import android.util.Log;
 import android.util.Slog;
 
@@ -48,7 +41,6 @@ import com.android.keyguard.KeyguardUpdateMonitorCallback;
 import com.android.internal.telephony.IccCardConstants.State;
 import com.android.systemui.R;
 
-import java.io.FileDescriptor;
 import java.io.PrintWriter;
 
 import vendor.oneplus.hardware.display.V1_0.IOneplusDisplay;
@@ -93,7 +85,6 @@ public class FODCircleView extends ImageView implements OnTouchListener {
             mIsDreaming = dreaming;
             mInsideCircle = false;
             mChange = true;
-            setCustomIcon();
         }
 
         @Override
@@ -102,7 +93,6 @@ public class FODCircleView extends ImageView implements OnTouchListener {
             mIsPulsing = pulsing;
             mInsideCircle = false;
             mChange = true;
-            setCustomIcon();
         }
 
         @Override
@@ -189,7 +179,7 @@ public class FODCircleView extends ImageView implements OnTouchListener {
         mPaintFingerprint.setAntiAlias(true);
         mPaintFingerprint.setColor(Color.GREEN);
 
-        setCustomIcon();
+        setImageResource(R.drawable.fod_icon_default);
 
         mPaintShow.setAntiAlias(true);
         mPaintShow.setColor(Color.argb(0x18, 0x00, 0xff, 0x00));
@@ -239,7 +229,7 @@ public class FODCircleView extends ImageView implements OnTouchListener {
         if(event.getAction() == MotionEvent.ACTION_UP) {
             newInside = false;
             try {
-                setCustomIcon();
+                setImageResource(R.drawable.fod_icon_default);
                 mDisplayDaemon.setMode(DISPLAY_AOD_MODE, 0);
                 mDisplayDaemon.setMode(DISPLAY_NOTIFY_PRESS, 0);
             } catch (RemoteException e) {}
@@ -253,7 +243,7 @@ public class FODCircleView extends ImageView implements OnTouchListener {
 
         if(!mInsideCircle) {
             //mParams.screenBrightness = .0f;
-            setCustomIcon();
+            setImageResource(R.drawable.fod_icon_default);
             mParams.dimAmount = mIsDreaming ? UNTOUCHED_DOZE_DIM : UNTOUCHED_DIM;
             mWM.updateViewLayout(this, mParams);
             return false;
@@ -295,7 +285,7 @@ public class FODCircleView extends ImageView implements OnTouchListener {
 
         mParams.packageName = "android";
 
-        setCustomIcon();
+        setImageResource(R.drawable.fod_icon_default);
         mIsEnrolling = isEnrolling;
         if (mIsEnrolling) {
             try {
@@ -323,32 +313,5 @@ public class FODCircleView extends ImageView implements OnTouchListener {
         mInsideCircle = false;
         mWM.removeView(this);
         viewAdded = false;
-    }
-
-    private void setCustomIcon(){
-        final String customIconURI = Settings.System.getStringForUser(getContext().getContentResolver(),
-                Settings.System.OMNI_CUSTOM_FP_ICON,
-                UserHandle.USER_CURRENT);
-
-        if (mIsDreaming && !mIsPulsing) {
-            setImageResource(R.drawable.fod_icon_empty);
-            return;
-        }
-
-        if (!TextUtils.isEmpty(customIconURI)) {
-            try {
-                ParcelFileDescriptor parcelFileDescriptor =
-                    getContext().getContentResolver().openFileDescriptor(Uri.parse(customIconURI), "r");
-                FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor();
-                Bitmap image = BitmapFactory.decodeFileDescriptor(fileDescriptor);
-                parcelFileDescriptor.close();
-                setImageBitmap(image);
-            }
-            catch (Exception e) {
-                setImageResource(R.drawable.fod_icon_default);
-            }
-        } else {
-            setImageResource(R.drawable.fod_icon_default);
-        }
     }
 }
