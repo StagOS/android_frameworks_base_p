@@ -59,7 +59,6 @@ import com.android.systemui.qs.tiles.WorkModeTile;
 import com.android.systemui.qs.QSTileHost;
 import com.android.systemui.util.leak.GarbageMonitor;
 import com.android.systemui.qs.tiles.AODTile;
-import com.android.systemui.qs.tiles.AmbientDisplayTile;
 
 public class QSFactoryImpl implements QSFactory {
 
@@ -139,8 +138,6 @@ public class QSFactoryImpl implements QSFactory {
                 return new ReadingModeTile(mHost);
             case "aod":
                 return new AODTile(mHost);
-            case "ambient_display":
-                return new AmbientDisplayTile(mHost);
             case "usb_tether":
                 return new UsbTetherTile(mHost);
             case "sync":
